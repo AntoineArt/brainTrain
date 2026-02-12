@@ -12,13 +12,12 @@ interface Props {
   isPaused: boolean;
 }
 
-function ShapeGrid({ grid, size }: { grid: number[][]; size: number }) {
-  const cellSize = Math.min(size / grid.length, 20);
+function ShapeGrid({ grid, cellPx }: { grid: number[][]; cellPx: number }) {
   return (
     <div
       className="grid gap-px"
       style={{
-        gridTemplateColumns: `repeat(${grid[0].length}, ${cellSize}px)`,
+        gridTemplateColumns: `repeat(${grid[0].length}, ${cellPx}px)`,
       }}
     >
       {grid.flat().map((cell, i) => (
@@ -26,9 +25,10 @@ function ShapeGrid({ grid, size }: { grid: number[][]; size: number }) {
           key={i}
           className="rounded-sm"
           style={{
-            width: cellSize,
-            height: cellSize,
-            backgroundColor: cell ? 'var(--primary)' : 'transparent',
+            width: cellPx,
+            height: cellPx,
+            backgroundColor: cell ? 'var(--primary)' : 'var(--border)',
+            opacity: cell ? 1 : 0.25,
           }}
         />
       ))}
@@ -79,7 +79,7 @@ export default function RotationGame({ difficulty, onAnswer, timeRemaining }: Pr
 
         {/* Original shape */}
         <div className="p-4 bg-surface rounded-xl border-2 border-primary">
-          <ShapeGrid grid={puzzle.shape} size={80} />
+          <ShapeGrid grid={puzzle.shape} cellPx={16} />
         </div>
 
         <p className="text-xs text-muted">Rotation : {puzzle.rotation}°</p>
@@ -106,7 +106,7 @@ export default function RotationGame({ difficulty, onAnswer, timeRemaining }: Pr
                 active:scale-95 disabled:cursor-default
               `}
             >
-              <ShapeGrid grid={shape} size={60} />
+              <ShapeGrid grid={shape} cellPx={16} />
             </button>
           );
         })}

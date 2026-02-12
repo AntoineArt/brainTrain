@@ -46,19 +46,19 @@ export default function ChercheCompte({ difficulty, onAnswer, timeRemaining }: P
 
   return (
     <div className="flex flex-col items-center justify-between h-full py-4">
-      <div className="flex-1 flex flex-col items-center justify-center gap-3 px-4">
-        <p className="text-sm text-muted">
-          Combien de <span className="text-xl">{puzzle.target}</span> ?
+      <div className="flex-1 flex flex-col items-center justify-center gap-4 px-4">
+        <p className="text-base text-muted">
+          Combien de <span className="text-3xl align-middle">{puzzle.target}</span> ?
         </p>
 
         <div
-          className="grid gap-1 p-3 bg-surface rounded-xl border border-border"
+          className="grid gap-1.5 p-4 bg-surface rounded-xl border border-border"
           style={{ gridTemplateColumns: `repeat(${puzzle.gridSize}, 1fr)` }}
         >
           {puzzle.grid.map((symbol, i) => (
             <div
               key={i}
-              className="w-10 h-10 flex items-center justify-center text-lg"
+              className="w-14 h-14 flex items-center justify-center text-2xl"
             >
               {symbol}
             </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { GameConfig, DifficultyLevel } from '@/types';
 import { useGame } from '@/hooks/useGame';
@@ -22,12 +22,13 @@ interface GameShellProps {
   }) => React.ReactNode;
 }
 
-export function GameShell({ config, difficulty = 1, onChainFinish, children }: GameShellProps) {
+export function GameShell({ config, difficulty: initialDifficulty = 1, onChainFinish, children }: GameShellProps) {
   const router = useRouter();
+  const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>(initialDifficulty);
   const game = useGame({
     gameId: config.id,
     duration: config.defaultDuration,
-    difficulty,
+    difficulty: selectedDifficulty,
   });
 
   const { state } = game;
@@ -47,7 +48,12 @@ export function GameShell({ config, difficulty = 1, onChainFinish, children }: G
         description={config.description}
         icon={config.icon}
         color={config.color}
-        onStart={game.startGame}
+        maxLevel={config.maxLevel}
+        initialDifficulty={selectedDifficulty}
+        onStart={(diff) => {
+          setSelectedDifficulty(diff);
+          game.startGame(diff);
+        }}
       />
     );
   }
@@ -109,7 +115,7 @@ export function GameShell({ config, difficulty = 1, onChainFinish, children }: G
         {children({
           onAnswer: game.answerQuestion,
           onComplete: game.finishGame,
-          difficulty,
+          difficulty: selectedDifficulty,
           timeRemaining: state.timeRemaining,
           isPaused: state.status === 'paused',
         })}

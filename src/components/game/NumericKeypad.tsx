@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useCallback } from 'react';
+
 interface NumericKeypadProps {
   value: string;
   onChange: (value: string) => void;
@@ -7,7 +9,7 @@ interface NumericKeypadProps {
 }
 
 export function NumericKeypad({ value, onChange, onSubmit }: NumericKeypadProps) {
-  const handleKey = (key: string) => {
+  const handleKey = useCallback((key: string) => {
     if (key === 'delete') {
       onChange(value.slice(0, -1));
     } else if (key === 'submit') {
@@ -21,7 +23,23 @@ export function NumericKeypad({ value, onChange, onSubmit }: NumericKeypadProps)
         onChange(value + key);
       }
     }
-  };
+  }, [value, onChange, onSubmit]);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key >= '0' && e.key <= '9') {
+        handleKey(e.key);
+      } else if (e.key === '-') {
+        handleKey('-');
+      } else if (e.key === 'Backspace') {
+        handleKey('delete');
+      } else if (e.key === 'Enter') {
+        handleKey('submit');
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [handleKey]);
 
   const keys = [
     ['1', '2', '3'],

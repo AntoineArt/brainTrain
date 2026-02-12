@@ -72,7 +72,8 @@ export function useGame({ gameId, duration, difficulty }: UseGameOptions) {
     setState((prev) => ({ ...prev, status: 'instructions' }));
   }, []);
 
-  const startGame = useCallback(() => {
+  const startGame = useCallback((difficultyOverride?: DifficultyLevel) => {
+    const diff = difficultyOverride ?? difficulty;
     responseTimesRef.current = [];
     setState({
       status: 'playing',
@@ -81,7 +82,7 @@ export function useGame({ gameId, duration, difficulty }: UseGameOptions) {
       totalAnswers: 0,
       currentStreak: 0,
       bestStreak: 0,
-      difficulty,
+      difficulty: diff,
       timeRemaining: duration,
       startedAt: Date.now(),
     });

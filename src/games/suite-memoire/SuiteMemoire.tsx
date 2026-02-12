@@ -23,6 +23,7 @@ export default function SuiteMemoire({ difficulty, onAnswer, timeRemaining }: Pr
   const [userInput, setUserInput] = useState<number[]>([]);
   const [phase, setPhase] = useState<Phase>('showing');
   const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
+  const [lastTapped, setLastTapped] = useState<number | null>(null);
   const roundStartRef = useRef(Date.now());
 
   const startRound = useCallback(() => {
@@ -63,6 +64,10 @@ export default function SuiteMemoire({ difficulty, onAnswer, timeRemaining }: Pr
   const handleCellClick = useCallback(
     (index: number) => {
       if (phase !== 'input') return;
+
+      // Flash feedback on every tap
+      setLastTapped(index);
+      setTimeout(() => setLastTapped(null), 200);
 
       const newInput = [...userInput, index];
       setUserInput(newInput);
@@ -112,8 +117,11 @@ export default function SuiteMemoire({ difficulty, onAnswer, timeRemaining }: Pr
           const isHighlighted =
             phase === 'showing' && showingIndex >= 0 && showingIndex < sequence.length && sequence[showingIndex] === i;
           const isUserSelected = phase === 'input' && userInput.includes(i);
+          const isTapping = lastTapped === i;
           const isCorrectFeedback = phase === 'feedback' && feedback === 'correct' && sequence.includes(i);
           const isIncorrectFeedback = phase === 'feedback' && feedback === 'incorrect' && sequence.includes(i);
+          // Count how many times this cell appears in user input
+          const tapCount = phase === 'input' ? userInput.filter((v) => v === i).length : 0;
 
           return (
             <button
@@ -121,18 +129,25 @@ export default function SuiteMemoire({ difficulty, onAnswer, timeRemaining }: Pr
               onClick={() => handleCellClick(i)}
               disabled={phase !== 'input'}
               className={`
-                rounded-xl aspect-square transition-all duration-200 touch-manipulation cursor-pointer border-2
+                relative rounded-xl aspect-square transition-all duration-200 touch-manipulation cursor-pointer border-2
                 ${isHighlighted ? 'bg-primary border-primary scale-95' : ''}
-                ${isUserSelected ? 'bg-primary/30 border-primary' : ''}
+                ${isTapping ? 'bg-primary border-primary scale-90' : ''}
+                ${isUserSelected && !isTapping ? 'bg-primary/30 border-primary' : ''}
                 ${isCorrectFeedback ? 'bg-success/30 border-success' : ''}
                 ${isIncorrectFeedback ? 'bg-error/30 border-error' : ''}
-                ${!isHighlighted && !isUserSelected && !isCorrectFeedback && !isIncorrectFeedback
+                ${!isHighlighted && !isUserSelected && !isTapping && !isCorrectFeedback && !isIncorrectFeedback
                   ? 'bg-surface border-border hover:bg-background'
                   : ''
                 }
                 disabled:cursor-default
               `}
-            />
+            >
+              {tapCount > 0 && phase === 'input' && (
+                <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-primary opacity-60">
+                  {tapCount}
+                </span>
+              )}
+            </button>
           );
         })}
       </div>
