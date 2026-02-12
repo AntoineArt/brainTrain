@@ -17,7 +17,7 @@ export function BottomNav() {
   }
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 glass border-t border-border/50 z-50 pb-[env(safe-area-inset-bottom)]">
+    <nav className="fixed bottom-0 left-0 right-0 glass border-t border-border/40 z-50 pb-[env(safe-area-inset-bottom)]">
       <div className="max-w-3xl mx-auto flex">
         {NAV_ITEMS.map((item) => {
           const isActive =
@@ -36,7 +36,7 @@ export function BottomNav() {
               `}
             >
               {isActive && (
-                <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full bg-gradient-to-r from-primary to-secondary" />
+                <span className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 rounded-full bg-primary" />
               )}
               <span className="text-lg">{item.icon}</span>
               <span className="text-[10px] font-semibold">{item.label}</span>

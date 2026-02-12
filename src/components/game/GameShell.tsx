@@ -71,18 +71,12 @@ export function GameShell({ config, difficulty = 1, onChainFinish, children }: G
 
   const timeRatio = state.timeRemaining / config.defaultDuration;
   const barColor =
-    timeRatio < 0.25 ? 'var(--error)' : timeRatio < 0.5 ? 'var(--warning)' : 'var(--success)';
-  const barGlow =
-    timeRatio < 0.25
-      ? '0 0 8px var(--glow-error)'
-      : timeRatio < 0.5
-        ? '0 0 6px rgba(251, 191, 36, 0.4)'
-        : '0 0 6px var(--glow-success)';
+    timeRatio < 0.25 ? 'var(--error)' : timeRatio < 0.5 ? 'var(--warning)' : 'var(--secondary)';
 
   return (
     <div className="flex flex-col h-dvh">
       {/* Game HUD */}
-      <div className="flex items-center justify-between px-4 py-2 glass border-b border-border/50">
+      <div className="flex items-center justify-between px-4 py-2 glass border-b border-border/40">
         <button
           onClick={() => router.push('/jeux')}
           className="text-muted hover:text-foreground transition-colors touch-manipulation cursor-pointer p-1"
@@ -99,14 +93,13 @@ export function GameShell({ config, difficulty = 1, onChainFinish, children }: G
         <GameScore score={state.score} streak={state.currentStreak} />
       </div>
 
-      {/* Animated time progress bar */}
-      <div className="h-1 bg-border/30">
+      {/* Time progress bar */}
+      <div className="h-1 bg-border/20">
         <div
           className={`h-full transition-all duration-200 rounded-r-full ${timeRatio < 0.25 ? 'animate-pulse-soft' : ''}`}
           style={{
             width: `${timeRatio * 100}%`,
             backgroundColor: barColor,
-            boxShadow: barGlow,
           }}
         />
       </div>

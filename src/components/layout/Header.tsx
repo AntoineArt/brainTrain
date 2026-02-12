@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 interface HeaderProps {
   title?: string;
@@ -12,7 +13,7 @@ export function Header({ title = 'BrainTrain', showBack = false }: HeaderProps) 
   const router = useRouter();
 
   return (
-    <header className="sticky top-0 glass border-b border-border/50 z-40 px-4 py-2.5">
+    <header className="sticky top-0 glass border-b border-border/40 z-40 px-4 py-2.5">
       <div className="flex items-center gap-3">
         {showBack && (
           <button
@@ -25,15 +26,16 @@ export function Header({ title = 'BrainTrain', showBack = false }: HeaderProps) 
             </svg>
           </button>
         )}
-        <h1 className="text-lg font-bold">
+        <h1 className="text-lg font-bold flex-1">
           {!showBack ? (
-            <Link href="/" className="gradient-text hover:opacity-80 transition-opacity">
+            <Link href="/" className="accent-text hover:opacity-80 transition-opacity tracking-tight">
               {title}
             </Link>
           ) : (
-            title
+            <span className="tracking-tight">{title}</span>
           )}
         </h1>
+        <ThemeToggle />
       </div>
     </header>
   );

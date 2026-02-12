@@ -1,8 +1,27 @@
 import type { Metadata, Viewport } from "next";
+import { Lexend, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { PlayerProvider } from "@/components/providers/PlayerProvider";
 import { SettingsProvider } from "@/components/providers/SettingsProvider";
 import { BottomNav } from "@/components/layout/BottomNav";
+
+const lexend = Lexend({
+  subsets: ["latin"],
+  variable: "--font-lexend",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "BrainTrain — Entraîne ton cerveau",
@@ -23,11 +42,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <body className="antialiased bg-background text-foreground">
+    <html lang="fr" data-theme="dark" suppressHydrationWarning>
+      <body
+        className={`${lexend.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
+      >
         <SettingsProvider>
           <PlayerProvider>
-            <div className="min-h-dvh flex flex-col max-w-3xl mx-auto">
+            <div className="min-h-dvh flex flex-col max-w-3xl mx-auto relative">
               <main className="flex-1 pb-14">{children}</main>
               <BottomNav />
             </div>

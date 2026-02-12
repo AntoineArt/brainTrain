@@ -34,8 +34,8 @@ export function NumericKeypad({ value, onChange, onSubmit }: NumericKeypadProps)
     <div className="w-full max-w-xs mx-auto px-4 pb-3">
       {/* Display */}
       <div className="text-center mb-3 px-4 py-2.5 bg-surface-light border border-border rounded-xl">
-        <span className="text-2xl font-bold tabular-nums min-h-[2rem] block">
-          {value || <span className="text-muted/50">?</span>}
+        <span className="font-mono text-2xl font-bold tabular-nums min-h-[2rem] block">
+          {value || <span className="text-muted/40">?</span>}
         </span>
       </div>
 
@@ -49,8 +49,8 @@ export function NumericKeypad({ value, onChange, onSubmit }: NumericKeypadProps)
               h-12 rounded-xl font-bold text-lg transition-all duration-100
               touch-manipulation cursor-pointer active:scale-95
               ${key === 'delete'
-                ? 'bg-error/15 text-error hover:bg-error/25'
-                : 'bg-surface-light border border-border text-foreground hover:bg-surface hover:border-primary/30'
+                ? 'bg-error/10 text-error hover:bg-error/20'
+                : 'bg-surface border border-border text-foreground hover:border-primary/30'
               }
             `}
           >
@@ -63,9 +63,8 @@ export function NumericKeypad({ value, onChange, onSubmit }: NumericKeypadProps)
       <button
         onClick={() => handleKey('submit')}
         disabled={value.length === 0}
-        className="w-full h-12 mt-1.5 rounded-xl font-bold text-lg
-          bg-gradient-to-r from-primary to-secondary text-white
-          shadow-lg shadow-primary/25
+        className="w-full h-12 mt-1.5 rounded-xl font-bold text-base
+          bg-primary text-white shadow-md shadow-primary/20
           transition-all duration-100 touch-manipulation cursor-pointer active:scale-[0.97]
           disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none"
       >

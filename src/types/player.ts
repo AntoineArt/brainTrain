@@ -25,7 +25,10 @@ export interface GameProgress {
   recentResults: GameResult[];
 }
 
+export type ThemeMode = 'light' | 'dark' | 'system';
+
 export interface AppSettings {
   soundEnabled: boolean;
   defaultDifficulty: DifficultyLevel;
+  theme: ThemeMode;
 }

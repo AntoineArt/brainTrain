@@ -33,7 +33,7 @@ export default function EnchainementPage() {
       <div className="flex flex-col items-center justify-center h-[calc(100dvh-60px)] px-6 text-center gap-5">
         <span className="text-5xl animate-float">🔀</span>
         <div className="animate-fade-in-up stagger-1">
-          <h2 className="text-2xl font-bold mb-1">Mode Enchaînement</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-1">Mode Enchaînement</h2>
           <p className="text-muted text-sm">
             Les mini-jeux s&apos;enchaînent aléatoirement. Arrête quand tu veux !
           </p>
@@ -52,12 +52,12 @@ export default function EnchainementPage() {
   if (chain.state.finished) {
     return (
       <div className="flex flex-col items-center justify-center h-[calc(100dvh-60px)] px-6 text-center gap-4">
-        <h2 className="text-xl font-bold text-muted animate-fade-in">Session terminée !</h2>
+        <h2 className="text-lg font-bold text-muted animate-fade-in tracking-tight">Session terminée !</h2>
         <div className="animate-bounce-in">
-          <div className="text-4xl font-extrabold gradient-text tabular-nums">
+          <div className="font-mono text-4xl font-extrabold accent-text tabular-nums tracking-tighter">
             {formatScore(chain.totalScore)}
           </div>
-          <p className="text-sm text-muted mt-1">
+          <p className="text-xs text-muted mt-1 uppercase tracking-widest">
             {chain.gamesPlayed} jeu{chain.gamesPlayed > 1 ? 'x' : ''} joué{chain.gamesPlayed > 1 ? 's' : ''}
           </p>
         </div>
@@ -72,7 +72,7 @@ export default function EnchainementPage() {
                   {result.correct}/{result.total} correct
                 </div>
               </div>
-              <div className="text-sm font-bold text-primary tabular-nums">
+              <div className="font-mono text-sm font-bold accent-text tabular-nums">
                 {formatScore(result.score)}
               </div>
             </Card>
@@ -96,7 +96,7 @@ export default function EnchainementPage() {
     const lastResult = chain.state.results[chain.state.results.length - 1];
     return (
       <div className="flex flex-col items-center justify-center h-[calc(100dvh-60px)] px-6 text-center gap-4">
-        <div className="text-3xl font-extrabold gradient-text tabular-nums animate-bounce-in">
+        <div className="font-mono text-3xl font-extrabold accent-text tabular-nums animate-bounce-in">
           +{formatScore(lastResult?.score ?? 0)}
         </div>
         <p className="text-sm text-muted animate-fade-in">Score total : {formatScore(chain.totalScore)}</p>

@@ -13,4 +13,5 @@ export type {
   PlayerStats,
   GameProgress,
   AppSettings,
+  ThemeMode,
 } from './player';

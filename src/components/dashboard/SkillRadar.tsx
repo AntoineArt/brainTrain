@@ -29,12 +29,12 @@ export function SkillRadar({ scores }: SkillRadarProps) {
       const { x, y } = polarToCartesian(i * angleStep, r);
       return `${x},${y}`;
     }).join(' ');
-    return <polygon key={factor} points={points} fill="none" stroke="var(--border)" strokeWidth="0.5" opacity={0.5} />;
+    return <polygon key={factor} points={points} fill="none" stroke="var(--border)" strokeWidth="0.5" opacity={0.4} />;
   });
 
   const axes = SKILLS.map((_, i) => {
     const { x, y } = polarToCartesian(i * angleStep, RADIUS);
-    return <line key={i} x1={CENTER} y1={CENTER} x2={x} y2={y} stroke="var(--border)" strokeWidth="0.5" opacity={0.5} />;
+    return <line key={i} x1={CENTER} y1={CENTER} x2={x} y2={y} stroke="var(--border)" strokeWidth="0.5" opacity={0.4} />;
   });
 
   const dataPoints = SKILLS.map((skill, i) => {
@@ -53,7 +53,7 @@ export function SkillRadar({ scores }: SkillRadarProps) {
         y={y}
         textAnchor="middle"
         dominantBaseline="central"
-        className="text-[9px] font-medium"
+        className="text-[8px] font-semibold uppercase tracking-wider"
         fill={SKILL_COLORS[skill]}
       >
         {SKILL_LABELS[skill]}
@@ -77,18 +77,13 @@ export function SkillRadar({ scores }: SkillRadarProps) {
   });
 
   return (
-    <svg viewBox="0 0 200 200" className="w-full max-w-[220px] mx-auto">
+    <svg viewBox="0 0 200 200" className="w-full max-w-[200px] mx-auto">
       {rings}
       {axes}
-      <defs>
-        <linearGradient id="radar-fill" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="var(--secondary)" stopOpacity="0.1" />
-        </linearGradient>
-      </defs>
       <polygon
         points={dataPoints}
-        fill="url(#radar-fill)"
+        fill="var(--primary)"
+        fillOpacity={0.12}
         stroke="var(--primary)"
         strokeWidth="1.5"
       />

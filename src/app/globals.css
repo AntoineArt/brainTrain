@@ -1,31 +1,76 @@
 @import "tailwindcss";
 
-:root {
-  --background: #0f0b1e;
-  --foreground: #f1f0f7;
-  --primary: #7c5cfc;
-  --primary-dark: #6344e8;
-  --primary-light: #a78bfa;
-  --secondary: #c084fc;
-  --success: #34d399;
-  --error: #f87171;
-  --warning: #fbbf24;
-  --surface: #1a1433;
-  --surface-light: #241d40;
-  --muted: #8b83a8;
-  --border: #2d2550;
+/* ============================================
+   DARK THEME (default)
+   Deep charcoal + warm coral/amber accents
+   ============================================ */
+:root,
+[data-theme="dark"] {
+  --background: #101012;
+  --foreground: #e8e6e1;
+  --primary: #ff6b35;
+  --primary-dark: #e55a2b;
+  --primary-light: #ff8c5e;
+  --secondary: #00c2a8;
+  --success: #3ecf8e;
+  --error: #ff6369;
+  --warning: #ffb224;
+  --surface: #1a1a1e;
+  --surface-light: #232328;
+  --muted: #76757e;
+  --border: #2c2c33;
 
-  --skill-calcul: #60a5fa;
-  --skill-memoire: #a78bfa;
-  --skill-logique: #34d399;
-  --skill-vitesse: #fb923c;
-  --skill-langage: #f472b6;
-  --skill-attention: #22d3ee;
-  --skill-culture: #c084fc;
+  --skill-calcul: #4da6ff;
+  --skill-memoire: #b56cf0;
+  --skill-logique: #3ecf8e;
+  --skill-vitesse: #ff6b35;
+  --skill-langage: #ff6eb4;
+  --skill-attention: #00c2a8;
+  --skill-culture: #ffb224;
 
-  --glow-primary: rgba(124, 92, 252, 0.4);
-  --glow-success: rgba(52, 211, 153, 0.4);
-  --glow-error: rgba(248, 113, 113, 0.4);
+  --glow-primary: rgba(255, 107, 53, 0.35);
+  --glow-secondary: rgba(0, 194, 168, 0.35);
+  --glow-success: rgba(62, 207, 142, 0.35);
+  --glow-error: rgba(255, 99, 105, 0.35);
+
+  --glass-bg: rgba(16, 16, 18, 0.75);
+  --noise-opacity: 0.03;
+}
+
+/* ============================================
+   LIGHT THEME
+   Warm cream + deep teal/terracotta accents
+   ============================================ */
+[data-theme="light"] {
+  --background: #f8f5f0;
+  --foreground: #1a1818;
+  --primary: #d4542a;
+  --primary-dark: #b8441f;
+  --primary-light: #e87a56;
+  --secondary: #0a8f7f;
+  --success: #1f9960;
+  --error: #d93d42;
+  --warning: #c88a00;
+  --surface: #ffffff;
+  --surface-light: #f0ece5;
+  --muted: #8a8480;
+  --border: #ddd6cb;
+
+  --skill-calcul: #2b7fd4;
+  --skill-memoire: #8f4ec7;
+  --skill-logique: #1f9960;
+  --skill-vitesse: #d4542a;
+  --skill-langage: #d44a8a;
+  --skill-attention: #0a8f7f;
+  --skill-culture: #c88a00;
+
+  --glow-primary: rgba(212, 84, 42, 0.2);
+  --glow-secondary: rgba(10, 143, 127, 0.2);
+  --glow-success: rgba(31, 153, 96, 0.2);
+  --glow-error: rgba(217, 61, 66, 0.2);
+
+  --glass-bg: rgba(248, 245, 240, 0.8);
+  --noise-opacity: 0.02;
 }
 
 @theme inline {
@@ -51,81 +96,88 @@
   --color-skill-attention: var(--skill-attention);
   --color-skill-culture: var(--skill-culture);
 
-  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-lexend);
+  --font-body: var(--font-dm-sans);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-body, var(--font-dm-sans, system-ui));
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display, var(--font-lexend, system-ui));
 }
 
 @utility touch-manipulation {
   touch-action: manipulation;
 }
 
-/* Animations */
+/* ============================================
+   ANIMATIONS
+   ============================================ */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scale-in {
-  from { opacity: 0; transform: scale(0.9); }
+  from { opacity: 0; transform: scale(0.92); }
   to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes bounce-in {
   0% { opacity: 0; transform: scale(0.3); }
-  50% { transform: scale(1.08); }
-  70% { transform: scale(0.95); }
+  50% { transform: scale(1.06); }
+  70% { transform: scale(0.96); }
   100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px var(--glow-primary); }
-  50% { box-shadow: 0 0 20px var(--glow-primary); }
 }
 
 @keyframes pulse-soft {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+  50% { opacity: 0.55; }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  75% { transform: translateX(4px); }
+  50% { transform: translateY(-5px); }
 }
 
 @keyframes pop {
   0% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+  50% { transform: scale(1.12); }
   100% { transform: scale(1); }
 }
 
-@keyframes confetti-fall {
-  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100px) rotate(720deg); opacity: 0; }
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes progress-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+@keyframes glow-breathe {
+  0%, 100% { box-shadow: 0 0 6px var(--glow-primary); }
+  50% { box-shadow: 0 0 18px var(--glow-primary); }
 }
 
 @utility animate-fade-in {
@@ -133,7 +185,7 @@ body {
 }
 
 @utility animate-fade-in-up {
-  animation: fade-in-up 0.4s ease-out both;
+  animation: fade-in-up 0.35s ease-out both;
 }
 
 @utility animate-scale-in {
@@ -141,15 +193,7 @@ body {
 }
 
 @utility animate-bounce-in {
-  animation: bounce-in 0.5s ease-out both;
-}
-
-@utility animate-shimmer {
-  animation: shimmer 2s infinite linear;
-}
-
-@utility animate-pulse-glow {
-  animation: pulse-glow 1.5s ease-in-out infinite;
+  animation: bounce-in 0.45s ease-out both;
 }
 
 @utility animate-pulse-soft {
@@ -160,12 +204,16 @@ body {
   animation: float 3s ease-in-out infinite;
 }
 
-@utility animate-shake {
-  animation: shake 0.4s ease-out;
+@utility animate-pop {
+  animation: pop 0.25s ease-out;
 }
 
-@utility animate-pop {
-  animation: pop 0.3s ease-out;
+@utility animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out both;
+}
+
+@utility animate-glow {
+  animation: glow-breathe 1.5s ease-in-out infinite;
 }
 
 /* Stagger delays */
@@ -178,23 +226,20 @@ body {
 
 /* Glass effect */
 @utility glass {
-  background: rgba(26, 20, 51, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
 }
 
-/* Gradient text */
-@utility gradient-text {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Accent text (primary color with warmth) */
+@utility accent-text {
+  color: var(--primary);
 }
 
 /* Smooth scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-track {
@@ -204,4 +249,10 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 999px;
+}
+
+/* Selection color */
+::selection {
+  background: var(--primary);
+  color: white;
 }
