@@ -28,7 +28,7 @@ export default function RootLayout({
         <SettingsProvider>
           <PlayerProvider>
             <div className="min-h-dvh flex flex-col max-w-3xl mx-auto">
-              <main className="flex-1 pb-20">{children}</main>
+              <main className="flex-1 pb-14">{children}</main>
               <BottomNav />
             </div>
           </PlayerProvider>

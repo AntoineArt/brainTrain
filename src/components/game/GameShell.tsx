@@ -33,7 +33,6 @@ export function GameShell({ config, difficulty = 1, onChainFinish, children }: G
   const { state } = game;
   const chainFinishCalledRef = useRef(false);
 
-  // Notify chain mode when game finishes
   useEffect(() => {
     if (state.status === 'finished' && onChainFinish && !chainFinishCalledRef.current) {
       chainFinishCalledRef.current = true;
@@ -47,6 +46,7 @@ export function GameShell({ config, difficulty = 1, onChainFinish, children }: G
         name={config.name}
         description={config.description}
         icon={config.icon}
+        color={config.color}
         onStart={game.startGame}
       />
     );
@@ -65,21 +65,30 @@ export function GameShell({ config, difficulty = 1, onChainFinish, children }: G
     );
   }
 
-  // In chain mode, when finished, show nothing (chain handles transition)
   if (state.status === 'finished' && onChainFinish) {
     return null;
   }
 
+  const timeRatio = state.timeRemaining / config.defaultDuration;
+  const barColor =
+    timeRatio < 0.25 ? 'var(--error)' : timeRatio < 0.5 ? 'var(--warning)' : 'var(--success)';
+  const barGlow =
+    timeRatio < 0.25
+      ? '0 0 8px var(--glow-error)'
+      : timeRatio < 0.5
+        ? '0 0 6px rgba(251, 191, 36, 0.4)'
+        : '0 0 6px var(--glow-success)';
+
   return (
-    <div className="flex flex-col h-[calc(100dvh-0px)]">
+    <div className="flex flex-col h-dvh">
       {/* Game HUD */}
-      <div className="flex items-center justify-between px-4 py-3 bg-surface border-b border-border">
+      <div className="flex items-center justify-between px-4 py-2 glass border-b border-border/50">
         <button
           onClick={() => router.push('/jeux')}
-          className="text-muted hover:text-foreground transition-colors touch-manipulation cursor-pointer"
+          className="text-muted hover:text-foreground transition-colors touch-manipulation cursor-pointer p-1"
           aria-label="Retour"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
         </button>
@@ -90,18 +99,14 @@ export function GameShell({ config, difficulty = 1, onChainFinish, children }: G
         <GameScore score={state.score} streak={state.currentStreak} />
       </div>
 
-      {/* Time progress bar */}
-      <div className="h-1 bg-border">
+      {/* Animated time progress bar */}
+      <div className="h-1 bg-border/30">
         <div
-          className="h-full transition-all duration-200"
+          className={`h-full transition-all duration-200 rounded-r-full ${timeRatio < 0.25 ? 'animate-pulse-soft' : ''}`}
           style={{
-            width: `${(state.timeRemaining / config.defaultDuration) * 100}%`,
-            backgroundColor:
-              state.timeRemaining / config.defaultDuration < 0.25
-                ? 'var(--error)'
-                : state.timeRemaining / config.defaultDuration < 0.5
-                ? 'var(--warning)'
-                : 'var(--success)',
+            width: `${timeRatio * 100}%`,
+            backgroundColor: barColor,
+            boxShadow: barGlow,
           }}
         />
       </div>

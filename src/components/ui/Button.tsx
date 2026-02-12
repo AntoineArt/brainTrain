@@ -8,17 +8,21 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants = {
-  primary: 'bg-primary text-white hover:bg-primary-dark active:bg-primary-dark',
-  secondary: 'bg-surface text-foreground border border-border hover:bg-background active:bg-background',
-  ghost: 'text-muted hover:text-foreground hover:bg-surface',
-  success: 'bg-success text-white hover:opacity-90',
-  error: 'bg-error text-white hover:opacity-90',
+  primary:
+    'bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:brightness-110 active:brightness-95',
+  secondary:
+    'bg-surface-light text-foreground border border-border hover:bg-border/30 hover:border-primary/40 active:bg-border/40',
+  ghost: 'text-muted hover:text-foreground hover:bg-surface-light',
+  success:
+    'bg-gradient-to-r from-success to-emerald-400 text-white shadow-lg shadow-success/25 hover:shadow-xl hover:shadow-success/30 hover:brightness-110',
+  error:
+    'bg-gradient-to-r from-error to-rose-400 text-white shadow-lg shadow-error/25 hover:shadow-xl hover:shadow-error/30 hover:brightness-110',
 };
 
 const sizes = {
   sm: 'px-3 py-1.5 text-sm',
-  md: 'px-4 py-2.5 text-base',
-  lg: 'px-6 py-3.5 text-lg',
+  md: 'px-5 py-2.5 text-base',
+  lg: 'px-6 py-3 text-lg',
 };
 
 export function Button({
@@ -31,10 +35,10 @@ export function Button({
   return (
     <button
       className={`
-        inline-flex items-center justify-center rounded-xl font-medium
+        inline-flex items-center justify-center rounded-xl font-semibold
         transition-all duration-200 touch-manipulation cursor-pointer
-        disabled:opacity-50 disabled:cursor-not-allowed
-        min-h-12
+        disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none
+        active:scale-[0.97]
         ${variants[variant]}
         ${sizes[size]}
         ${className}

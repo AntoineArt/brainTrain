@@ -9,10 +9,10 @@ interface GameScoreProps {
 
 export function GameScore({ score, streak }: GameScoreProps) {
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-lg font-bold tabular-nums">{formatScore(score)}</span>
+    <div className="flex items-center gap-2">
+      <span className="text-base font-bold tabular-nums">{formatScore(score)}</span>
       {streak !== undefined && streak > 1 && (
-        <span className="text-sm text-warning font-medium">
+        <span className="text-xs font-bold text-warning bg-warning/15 px-1.5 py-0.5 rounded-md animate-pop">
           x{streak}
         </span>
       )}

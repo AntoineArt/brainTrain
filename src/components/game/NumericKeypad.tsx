@@ -31,26 +31,26 @@ export function NumericKeypad({ value, onChange, onSubmit }: NumericKeypadProps)
   ];
 
   return (
-    <div className="w-full max-w-sm mx-auto px-4 pb-4">
+    <div className="w-full max-w-xs mx-auto px-4 pb-3">
       {/* Display */}
-      <div className="text-center mb-4 px-4 py-3 bg-surface border border-border rounded-xl">
-        <span className="text-3xl font-bold tabular-nums min-h-[2.5rem] block">
-          {value || <span className="text-muted">?</span>}
+      <div className="text-center mb-3 px-4 py-2.5 bg-surface-light border border-border rounded-xl">
+        <span className="text-2xl font-bold tabular-nums min-h-[2rem] block">
+          {value || <span className="text-muted/50">?</span>}
         </span>
       </div>
 
       {/* Keypad */}
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-1.5">
         {keys.flat().map((key) => (
           <button
             key={key}
             onClick={() => handleKey(key)}
             className={`
-              h-14 rounded-xl font-bold text-xl transition-all duration-100
+              h-12 rounded-xl font-bold text-lg transition-all duration-100
               touch-manipulation cursor-pointer active:scale-95
               ${key === 'delete'
-                ? 'bg-error/10 text-error'
-                : 'bg-surface border border-border text-foreground hover:bg-background'
+                ? 'bg-error/15 text-error hover:bg-error/25'
+                : 'bg-surface-light border border-border text-foreground hover:bg-surface hover:border-primary/30'
               }
             `}
           >
@@ -63,9 +63,11 @@ export function NumericKeypad({ value, onChange, onSubmit }: NumericKeypadProps)
       <button
         onClick={() => handleKey('submit')}
         disabled={value.length === 0}
-        className="w-full h-14 mt-2 rounded-xl font-bold text-xl bg-primary text-white
-          transition-all duration-100 touch-manipulation cursor-pointer active:scale-95
-          disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full h-12 mt-1.5 rounded-xl font-bold text-lg
+          bg-gradient-to-r from-primary to-secondary text-white
+          shadow-lg shadow-primary/25
+          transition-all duration-100 touch-manipulation cursor-pointer active:scale-[0.97]
+          disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none"
       >
         Valider
       </button>

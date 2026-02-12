@@ -23,23 +23,20 @@ function polarToCartesian(angle: number, radius: number): { x: number; y: number
 export function SkillRadar({ scores }: SkillRadarProps) {
   const angleStep = 360 / SKILLS.length;
 
-  // Background rings
   const rings = [0.25, 0.5, 0.75, 1].map((factor) => {
     const r = RADIUS * factor;
     const points = SKILLS.map((_, i) => {
       const { x, y } = polarToCartesian(i * angleStep, r);
       return `${x},${y}`;
     }).join(' ');
-    return <polygon key={factor} points={points} fill="none" stroke="var(--border)" strokeWidth="1" />;
+    return <polygon key={factor} points={points} fill="none" stroke="var(--border)" strokeWidth="0.5" opacity={0.5} />;
   });
 
-  // Axes
   const axes = SKILLS.map((_, i) => {
     const { x, y } = polarToCartesian(i * angleStep, RADIUS);
-    return <line key={i} x1={CENTER} y1={CENTER} x2={x} y2={y} stroke="var(--border)" strokeWidth="1" />;
+    return <line key={i} x1={CENTER} y1={CENTER} x2={x} y2={y} stroke="var(--border)" strokeWidth="0.5" opacity={0.5} />;
   });
 
-  // Data polygon
   const dataPoints = SKILLS.map((skill, i) => {
     const value = Math.min(100, Math.max(0, scores[skill] || 0));
     const r = (value / 100) * RADIUS;
@@ -47,7 +44,6 @@ export function SkillRadar({ scores }: SkillRadarProps) {
     return `${x},${y}`;
   }).join(' ');
 
-  // Labels
   const labels = SKILLS.map((skill, i) => {
     const { x, y } = polarToCartesian(i * angleStep, LABEL_RADIUS);
     return (
@@ -58,14 +54,13 @@ export function SkillRadar({ scores }: SkillRadarProps) {
         textAnchor="middle"
         dominantBaseline="central"
         className="text-[9px] font-medium"
-        fill="var(--muted)"
+        fill={SKILL_COLORS[skill]}
       >
         {SKILL_LABELS[skill]}
       </text>
     );
   });
 
-  // Data points (circles)
   const dots = SKILLS.map((skill, i) => {
     const value = Math.min(100, Math.max(0, scores[skill] || 0));
     const r = (value / 100) * RADIUS;
@@ -82,15 +77,20 @@ export function SkillRadar({ scores }: SkillRadarProps) {
   });
 
   return (
-    <svg viewBox="0 0 200 200" className="w-full max-w-[250px] mx-auto">
+    <svg viewBox="0 0 200 200" className="w-full max-w-[220px] mx-auto">
       {rings}
       {axes}
+      <defs>
+        <linearGradient id="radar-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="var(--secondary)" stopOpacity="0.1" />
+        </linearGradient>
+      </defs>
       <polygon
         points={dataPoints}
-        fill="var(--primary)"
-        fillOpacity={0.15}
+        fill="url(#radar-fill)"
         stroke="var(--primary)"
-        strokeWidth="2"
+        strokeWidth="1.5"
       />
       {dots}
       {labels}
