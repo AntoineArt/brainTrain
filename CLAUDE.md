@@ -39,7 +39,7 @@ The app is a brain training platform with 11 mini-games, each in `src/games/[gam
 
 Two React contexts in `src/components/providers/`:
 - **PlayerProvider** — Player stats, skill scores, game history (persisted to localStorage with `bt_` prefix)
-- **SettingsProvider** — Sound toggle, default difficulty
+- **SettingsProvider** — Sound toggle, default difficulty, theme (light/dark/system)
 
 Custom hooks in `src/hooks/`:
 - `useGame` — Full game lifecycle (idle → instructions → playing → finished), score tracking, answer submission
@@ -65,7 +65,7 @@ Base 100 pts per correct answer, speed multiplier (up to 2x under 5s), streak bo
 
 ### Types (`src/types/`)
 
-Key types: `CognitiveSkill` (7 skills: calcul, memoire, logique, vitesse, langage, attention, culture), `DifficultyLevel` (1–4), `GameStatus`, `GameConfig`, `GameState`, `PlayerStats`.
+Key types: `CognitiveSkill` (7 skills: calcul, memoire, logique, vitesse, langage, attention, culture), `DifficultyLevel` (1–4), `GameStatus`, `GameConfig`, `GameState`, `PlayerStats`, `ThemeMode` (light/dark/system).
 
 ## Code Conventions
 
@@ -74,7 +74,10 @@ Key types: `CognitiveSkill` (7 skills: calcul, memoire, logique, vitesse, langag
 - Context API for global state — no prop drilling
 - `as any` is forbidden
 - Mobile-first responsive design (max-w-3xl container)
-- CSS theme variables defined in `src/app/globals.css` with skill-specific colors
+- Dual theme system via `data-theme` attribute on `<html>` — dark (charcoal+coral+teal) and light (cream+terracotta+deep teal)
+- CSS custom properties in `src/app/globals.css` switch per theme; includes noise texture, glass utility, animations
+- Fonts loaded via `next/font/google`: Lexend (display), DM Sans (body), JetBrains Mono (mono) — exposed as CSS variables
+- `ThemeToggle` component in Header for light/dark/system switching
 
 ## Git Workflow
 
