@@ -1,65 +1,116 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import Link from 'next/link';
+import { Header } from '@/components/layout/Header';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { SkillRadar } from '@/components/dashboard/SkillRadar';
+import { GAME_REGISTRY } from '@/games/registry';
+import { getItem, STORAGE_KEYS } from '@/lib/storage';
+import type { GameResult, PlayerStats } from '@/types';
+import { formatScore } from '@/lib/utils';
+import { useEffect, useState } from 'react';
+
+export default function HomePage() {
+  const [recentResults, setRecentResults] = useState<GameResult[]>([]);
+  const [stats, setStats] = useState<PlayerStats | null>(null);
+
+  useEffect(() => {
+    const history = getItem<GameResult[]>(STORAGE_KEYS.GAME_HISTORY) ?? [];
+    setRecentResults(history.slice(0, 5));
+
+    const playerStats = getItem<PlayerStats>(STORAGE_KEYS.PLAYER_STATS);
+    setStats(playerStats);
+  }, []);
+
+  const defaultSkills = {
+    calcul: 0, memoire: 0, logique: 0,
+    vitesse: 0, langage: 0, attention: 0,
+    culture: 0,
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <Header />
+      <div className="px-4 py-4 space-y-6">
+        {/* Welcome */}
+        <div>
+          <h2 className="text-2xl font-bold">Bonjour !</h2>
+          <p className="text-muted mt-1">Prêt à entraîner ton cerveau ?</p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Quick start cards */}
+        <div className="grid grid-cols-2 gap-3">
+          <Link href="/jeux" className="block">
+            <Card hoverable className="bg-gradient-to-br from-primary to-primary-dark text-white border-0 h-full">
+              <div className="flex flex-col gap-2">
+                <span className="text-2xl">🎮</span>
+                <h3 className="font-bold text-sm">Choisir un jeu</h3>
+                <p className="text-white/70 text-xs">11 mini-jeux</p>
+              </div>
+            </Card>
+          </Link>
+          <Link href="/jeux/enchainement" className="block">
+            <Card hoverable className="bg-gradient-to-br from-secondary to-primary text-white border-0 h-full">
+              <div className="flex flex-col gap-2">
+                <span className="text-2xl">🔀</span>
+                <h3 className="font-bold text-sm">Enchaînement</h3>
+                <p className="text-white/70 text-xs">Jeux aléatoires</p>
+              </div>
+            </Card>
+          </Link>
         </div>
-      </main>
-    </div>
+
+        {/* Skill radar */}
+        <Card>
+          <h3 className="font-bold text-sm mb-2 text-center">Tes compétences</h3>
+          <SkillRadar scores={stats?.skillScores ?? defaultSkills} />
+        </Card>
+
+        {/* Featured games */}
+        <div>
+          <h3 className="font-bold text-lg mb-3">Jeux populaires</h3>
+          <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4">
+            {GAME_REGISTRY.slice(0, 5).map((game) => (
+              <Link key={game.id} href={`/jeux/${game.id}`} className="shrink-0">
+                <Card hoverable className="w-28">
+                  <div className="flex flex-col items-center text-center gap-1.5">
+                    <span className="text-2xl">{game.icon}</span>
+                    <span className="text-xs font-bold leading-tight">{game.name}</span>
+                  </div>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Recent activity */}
+        {recentResults.length > 0 && (
+          <div>
+            <h3 className="font-bold text-lg mb-3">Activité récente</h3>
+            <div className="space-y-2">
+              {recentResults.map((result) => {
+                const game = GAME_REGISTRY.find((g) => g.id === result.gameId);
+                if (!game) return null;
+                return (
+                  <Card key={result.id} className="flex items-center gap-3 py-3">
+                    <span className="text-xl">{game.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium text-sm truncate">{game.name}</div>
+                      <div className="text-xs text-muted">
+                        {result.correctAnswers}/{result.totalAnswers} correct — {result.accuracy}%
+                      </div>
+                    </div>
+                    <div className="text-sm font-bold text-primary tabular-nums">
+                      {formatScore(result.score)}
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
