@@ -21,6 +21,8 @@ const GAME_COMPONENTS: Record<string, React.ComponentType<GameComponentProps>> =
   'quick-sort': dynamic(() => import('@/games/quick-sort/QuickSort')),
   'trivia': dynamic(() => import('@/games/trivia/Trivia')),
   'word-definition': dynamic(() => import('@/games/word-definition/WordDefinition')),
+  'number-chain': dynamic(() => import('@/games/number-chain/NumberChain')),
+  'estimation': dynamic(() => import('@/games/estimation/Estimation')),
 };
 
 export default function GamePage({

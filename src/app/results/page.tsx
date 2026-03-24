@@ -36,7 +36,7 @@ export default function ResultsPage() {
             <div className="text-[10px] text-muted font-semibold uppercase tracking-wider">{t('results.games')}</div>
           </Card>
           <Card className="text-center p-3">
-            <div className="font-mono text-xl font-bold accent-text">{formatScore(totalScore)}</div>
+            <div className="font-mono text-xl font-bold accent-text">{formatScore(totalScore, locale)}</div>
             <div className="text-[10px] text-muted font-semibold uppercase tracking-wider">{t('results.totalScore')}</div>
           </Card>
           <Card className="text-center p-3">
@@ -73,7 +73,7 @@ export default function ResultsPage() {
                       </div>
                     </div>
                     <div className="font-mono text-sm font-bold accent-text tabular-nums">
-                      {formatScore(result.score)}
+                      {formatScore(result.score, locale)}
                     </div>
                   </Card>
                 );

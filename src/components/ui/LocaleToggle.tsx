@@ -1,9 +1,9 @@
 'use client';
 
-import { useLocale } from '@/components/providers/LocaleProvider';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export function LocaleToggle() {
-  const { locale, setLocale } = useLocale();
+  const { t, locale, setLocale } = useTranslation();
 
   return (
     <button
@@ -12,8 +12,8 @@ export function LocaleToggle() {
         bg-surface-light border border-border/50 text-muted
         hover:text-foreground hover:border-border transition-all duration-150
         touch-manipulation cursor-pointer active:scale-95"
-      aria-label={locale === 'fr' ? 'Switch to English' : 'Passer en français'}
-      title={locale === 'fr' ? 'Switch to English' : 'Passer en français'}
+      aria-label={t('locale.switchTo')}
+      title={t('locale.switchTo')}
     >
       {locale === 'fr' ? 'EN' : 'FR'}
     </button>

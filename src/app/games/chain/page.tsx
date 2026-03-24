@@ -28,7 +28,7 @@ const GAME_COMPONENTS: Record<string, React.ComponentType<GameComponentProps>> =
 
 export default function ChainPage() {
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const chain = useChainMode();
 
   // Not started yet
@@ -59,7 +59,7 @@ export default function ChainPage() {
         <h2 className="text-lg font-bold text-muted animate-fade-in tracking-tight">{t('chain.sessionFinished')}</h2>
         <div className="animate-bounce-in">
           <div className="font-mono text-4xl font-extrabold accent-text tabular-nums tracking-tighter">
-            {formatScore(chain.totalScore)}
+            {formatScore(chain.totalScore, locale)}
           </div>
           <p className="text-xs text-muted mt-1 uppercase tracking-widest">
             {t(chain.gamesPlayed > 1 ? 'chain.gameCount_other' : 'chain.gameCount_one', { count: chain.gamesPlayed })}
@@ -77,7 +77,7 @@ export default function ChainPage() {
                 </div>
               </div>
               <div className="font-mono text-sm font-bold accent-text tabular-nums">
-                {formatScore(result.score)}
+                {formatScore(result.score, locale)}
               </div>
             </Card>
           ))}
@@ -101,9 +101,9 @@ export default function ChainPage() {
     return (
       <div className="flex flex-col items-center justify-center h-[calc(100dvh-60px)] px-6 text-center gap-4">
         <div className="font-mono text-3xl font-extrabold accent-text tabular-nums animate-bounce-in">
-          +{formatScore(lastResult?.score ?? 0)}
+          +{formatScore(lastResult?.score ?? 0, locale)}
         </div>
-        <p className="text-sm text-muted animate-fade-in">{t('chain.totalScore', { score: formatScore(chain.totalScore) })}</p>
+        <p className="text-sm text-muted animate-fade-in">{t('chain.totalScore', { score: formatScore(chain.totalScore, locale) })}</p>
 
         <div className="flex gap-3 animate-fade-in-up stagger-1">
           <Button variant="secondary" onClick={chain.endChain}>

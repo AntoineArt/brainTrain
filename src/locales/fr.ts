@@ -8,7 +8,7 @@ const fr = {
   'home.greeting': 'Bonjour !',
   'home.subtitle': 'Prêt à entraîner ton cerveau ?',
   'home.chooseGame': 'Choisir un jeu',
-  'home.miniGames': '12 mini-jeux',
+  'home.miniGames': '14 mini-jeux',
   'home.chainMode': 'Enchaînement',
   'home.randomGames': 'Jeux aléatoires',
   'home.yourSkills': 'Tes compétences',
@@ -161,6 +161,24 @@ const fr = {
   'wordDefinition.hintCount': 'Indice ({count})',
   'wordDefinition.wordWas': 'Le mot était :',
 
+  // Number Chain game
+  'game.numberChain.name': 'Chaîne de Calcul',
+  'game.numberChain.description': 'Suis les opérations et trouve le résultat final !',
+  'numberChain.start': 'Départ',
+  'numberChain.step': 'Étape {current}/{total}',
+  'numberChain.whatIsResult': 'Quel est le résultat ?',
+
+  // Estimation game
+  'game.estimation.name': 'Estimation',
+  'game.estimation.description': 'Estime les quantités le plus précisément possible !',
+  'estimation.howMany': 'Combien de points ?',
+  'estimation.whatPercentage': 'Quel pourcentage ?',
+  'estimation.whatResult': 'Quel résultat (environ) ?',
+  'estimation.estimate': 'Donne ton estimation',
+  'estimation.close': 'Presque !',
+  'estimation.actual': 'Réponse',
+  'estimation.error': 'Erreur',
+
   // Months
   'month.1': 'Janvier',
   'month.2': 'Février',
@@ -177,6 +195,8 @@ const fr = {
 
   // Settings / Language
   'settings.language': 'Langue',
+  'locale.switchTo': 'Switch to English',
+  'game.back': 'Retour',
 } as const;
 
 export default fr;

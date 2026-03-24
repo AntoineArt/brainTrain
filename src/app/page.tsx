@@ -12,7 +12,7 @@ import { formatScore } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 export default function HomePage() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [recentResults, setRecentResults] = useState<GameResult[]>([]);
   const [stats, setStats] = useState<PlayerStats | null>(null);
 
@@ -108,7 +108,7 @@ export default function HomePage() {
                       </div>
                     </div>
                     <div className="font-mono text-sm font-bold accent-text tabular-nums">
-                      {formatScore(result.score)}
+                      {formatScore(result.score, locale)}
                     </div>
                   </Card>
                 );

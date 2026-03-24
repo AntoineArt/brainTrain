@@ -22,7 +22,7 @@ export function GameOverScreen({
   onReplay,
   onQuit,
 }: GameOverScreenProps) {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const accuracy = calculateAccuracy(correctAnswers, totalAnswers);
 
   return (
@@ -31,7 +31,7 @@ export function GameOverScreen({
 
       <div className="animate-bounce-in">
         <div className="font-mono text-5xl font-extrabold accent-text tabular-nums tracking-tighter">
-          {formatScore(score)}
+          {formatScore(score, locale)}
         </div>
         <p className="text-xs text-muted mt-1 uppercase tracking-widest">{t('game.points')}</p>
       </div>

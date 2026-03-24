@@ -32,8 +32,8 @@ export function formatTime(seconds: number): string {
   return `${secs}s`;
 }
 
-export function formatScore(score: number): string {
-  return score.toLocaleString('fr-FR');
+export function formatScore(score: number, locale: 'fr' | 'en' = 'fr'): string {
+  return score.toLocaleString(locale === 'fr' ? 'fr-FR' : 'en-US');
 }
 
 export function todayDateString(): string {

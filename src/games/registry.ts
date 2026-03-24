@@ -122,6 +122,26 @@ export const GAME_REGISTRY: GameConfig[] = [
     maxLevel: 5,
     color: '#6366f1',
   },
+  {
+    id: 'number-chain',
+    name: 'Chaîne de Calcul',
+    description: 'Suis les opérations et trouve le résultat final !',
+    icon: '🔗',
+    skills: ['math', 'memory'],
+    defaultDuration: 45,
+    maxLevel: 5,
+    color: '#0ea5e9',
+  },
+  {
+    id: 'estimation',
+    name: 'Estimation',
+    description: 'Estime les quantités le plus précisément possible !',
+    icon: '🧮',
+    skills: ['math', 'logic'],
+    defaultDuration: 45,
+    maxLevel: 5,
+    color: '#14b8a6',
+  },
 ];
 
 export const GAME_MAP = new Map(GAME_REGISTRY.map((g) => [g.id, g]));
@@ -140,4 +160,6 @@ export const GAME_I18N: Record<string, { name: TranslationKey; description: Tran
   'quick-sort': { name: 'game.quickSort.name', description: 'game.quickSort.description' },
   'trivia': { name: 'game.trivia.name', description: 'game.trivia.description' },
   'word-definition': { name: 'game.wordDefinition.name', description: 'game.wordDefinition.description' },
+  'number-chain': { name: 'game.numberChain.name', description: 'game.numberChain.description' },
+  'estimation': { name: 'game.estimation.name', description: 'game.estimation.description' },
 };

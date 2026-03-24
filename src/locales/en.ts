@@ -10,7 +10,7 @@ const en: { [K in keyof typeof fr]: string } = {
   'home.greeting': 'Hello!',
   'home.subtitle': 'Ready to train your brain?',
   'home.chooseGame': 'Choose a game',
-  'home.miniGames': '12 mini-games',
+  'home.miniGames': '14 mini-games',
   'home.chainMode': 'Chain Mode',
   'home.randomGames': 'Random games',
   'home.yourSkills': 'Your skills',
@@ -163,6 +163,24 @@ const en: { [K in keyof typeof fr]: string } = {
   'wordDefinition.hintCount': 'Hint ({count})',
   'wordDefinition.wordWas': 'The word was:',
 
+  // Number Chain game
+  'game.numberChain.name': 'Number Chain',
+  'game.numberChain.description': 'Follow the operations and find the final result!',
+  'numberChain.start': 'Start',
+  'numberChain.step': 'Step {current}/{total}',
+  'numberChain.whatIsResult': 'What is the result?',
+
+  // Estimation game
+  'game.estimation.name': 'Estimation',
+  'game.estimation.description': 'Estimate quantities as precisely as you can!',
+  'estimation.howMany': 'How many dots?',
+  'estimation.whatPercentage': 'What percentage?',
+  'estimation.whatResult': 'What result (approximately)?',
+  'estimation.estimate': 'Give your estimate',
+  'estimation.close': 'Close!',
+  'estimation.actual': 'Answer',
+  'estimation.error': 'Error',
+
   // Months
   'month.1': 'January',
   'month.2': 'February',
@@ -179,6 +197,8 @@ const en: { [K in keyof typeof fr]: string } = {
 
   // Settings / Language
   'settings.language': 'Language',
+  'locale.switchTo': 'Passer en français',
+  'game.back': 'Back',
 } as const;
 
 export default en;
