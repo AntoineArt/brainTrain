@@ -1,4 +1,5 @@
 import type { GameConfig } from '@/types';
+import type { TranslationKey } from '@/locales';
 
 export const GAME_REGISTRY: GameConfig[] = [
   {
@@ -124,3 +125,19 @@ export const GAME_REGISTRY: GameConfig[] = [
 ];
 
 export const GAME_MAP = new Map(GAME_REGISTRY.map((g) => [g.id, g]));
+
+/** Maps game ID → translation keys for name and description */
+export const GAME_I18N: Record<string, { name: TranslationKey; description: TranslationKey }> = {
+  'speed-math': { name: 'game.speedMath.name', description: 'game.speedMath.description' },
+  'memory-sequence': { name: 'game.memorySequence.name', description: 'game.memorySequence.description' },
+  'find-intruder': { name: 'game.findIntruder.name', description: 'game.findIntruder.description' },
+  'reflex': { name: 'game.reflex.name', description: 'game.reflex.description' },
+  'logic-plus': { name: 'game.logicPlus.name', description: 'game.logicPlus.description' },
+  'right-word': { name: 'game.rightWord.name', description: 'game.rightWord.description' },
+  'rotation': { name: 'game.rotation.name', description: 'game.rotation.description' },
+  'search-count': { name: 'game.searchCount.name', description: 'game.searchCount.description' },
+  'pairs': { name: 'game.pairs.name', description: 'game.pairs.description' },
+  'quick-sort': { name: 'game.quickSort.name', description: 'game.quickSort.description' },
+  'trivia': { name: 'game.trivia.name', description: 'game.trivia.description' },
+  'word-definition': { name: 'game.wordDefinition.name', description: 'game.wordDefinition.description' },
+};

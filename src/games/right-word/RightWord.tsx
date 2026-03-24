@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { DifficultyLevel } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 import { AnswerOptions } from '@/components/game/AnswerOptions';
 import { getQuestion, type ShuffledQuestion } from './logic';
 
@@ -14,20 +15,21 @@ interface Props {
 }
 
 export default function RightWord({ difficulty, onAnswer, timeRemaining }: Props) {
+  const { locale } = useTranslation();
   const usedWordsRef = useRef(new Set<string>());
   const [question, setQuestion] = useState<ShuffledQuestion | null>(() =>
-    getQuestion(difficulty, usedWordsRef.current),
+    getQuestion(difficulty, usedWordsRef.current, locale),
   );
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const roundStartRef = useRef(Date.now());
 
   const nextQuestion = useCallback(() => {
-    const q = getQuestion(difficulty, usedWordsRef.current);
+    const q = getQuestion(difficulty, usedWordsRef.current, locale);
     if (q) usedWordsRef.current.add(q.word);
     setQuestion(q);
     setSelectedIndex(null);
     roundStartRef.current = Date.now();
-  }, [difficulty]);
+  }, [difficulty, locale]);
 
   useEffect(() => {
     usedWordsRef.current.clear();

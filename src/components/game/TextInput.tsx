@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface TextInputProps {
   value: string;
@@ -11,8 +12,10 @@ interface TextInputProps {
   disabled?: boolean;
 }
 
-export function TextInput({ value, onChange, onSubmit, placeholder = 'Tape ta r√©ponse‚Ä¶', maxLength = 30, disabled = false }: TextInputProps) {
+export function TextInput({ value, onChange, onSubmit, placeholder, maxLength = 30, disabled = false }: TextInputProps) {
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
+  const resolvedPlaceholder = placeholder ?? t('game.inputPlaceholder');
 
   useEffect(() => {
     if (!disabled) {
@@ -35,7 +38,7 @@ export function TextInput({ value, onChange, onSubmit, placeholder = 'Tape ta r√
         onChange={(e) => onChange(e.target.value.slice(0, maxLength))}
         onKeyDown={handleKeyDown}
         disabled={disabled}
-        placeholder={placeholder}
+        placeholder={resolvedPlaceholder}
         autoComplete="off"
         autoCapitalize="off"
         spellCheck={false}
@@ -53,7 +56,7 @@ export function TextInput({ value, onChange, onSubmit, placeholder = 'Tape ta r√
           transition-all duration-100 touch-manipulation cursor-pointer active:scale-[0.97]
           disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none"
       >
-        Valider
+        {t('game.validate')}
       </button>
     </div>
   );

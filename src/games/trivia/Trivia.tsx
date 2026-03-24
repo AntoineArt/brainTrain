@@ -2,9 +2,10 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { DifficultyLevel } from '@/types';
+import type { TranslationKey } from '@/locales';
+import { useTranslation } from '@/hooks/useTranslation';
 import { AnswerOptions } from '@/components/game/AnswerOptions';
 import { getQuestion, type ShuffledQuizQuestion } from './logic';
-import { CATEGORY_LABELS } from './config';
 
 interface Props {
   difficulty: DifficultyLevel;
@@ -15,22 +16,23 @@ interface Props {
 }
 
 export default function Trivia({ difficulty, onAnswer, timeRemaining }: Props) {
+  const { t, locale } = useTranslation();
   const usedIdsRef = useRef(new Set<string>());
   const [question, setQuestion] = useState<ShuffledQuizQuestion | null>(() =>
-    getQuestion(difficulty, usedIdsRef.current),
+    getQuestion(difficulty, usedIdsRef.current, undefined, locale),
   );
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const roundStartRef = useRef(Date.now());
 
   const nextQuestion = useCallback(() => {
-    const q = getQuestion(difficulty, usedIdsRef.current);
+    const q = getQuestion(difficulty, usedIdsRef.current, undefined, locale);
     if (q) usedIdsRef.current.add(q.id);
     setQuestion(q);
     setSelectedIndex(null);
     setShowExplanation(false);
     roundStartRef.current = Date.now();
-  }, [difficulty]);
+  }, [difficulty, locale]);
 
   useEffect(() => {
     usedIdsRef.current.clear();
@@ -58,7 +60,7 @@ export default function Trivia({ difficulty, onAnswer, timeRemaining }: Props) {
     <div className="flex flex-col items-center justify-between h-full py-6">
       <div className="flex-1 flex flex-col items-center justify-center gap-4 px-4">
         <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-skill-culture/10 text-skill-culture">
-          {CATEGORY_LABELS[question.category]}
+          {t(`category.${question.category}` as TranslationKey)}
         </span>
 
         <h3 className="text-lg font-bold text-center leading-snug">

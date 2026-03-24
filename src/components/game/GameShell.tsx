@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { GameConfig, DifficultyLevel } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
+import { GAME_I18N } from '@/games/registry';
 import { useGame } from '@/hooks/useGame';
 import { GameTimer } from './GameTimer';
 import { GameScore } from './GameScore';
@@ -24,6 +26,7 @@ interface GameShellProps {
 
 export function GameShell({ config, difficulty: initialDifficulty = 1, onChainFinish, children }: GameShellProps) {
   const router = useRouter();
+  const { t } = useTranslation();
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>(initialDifficulty);
   const game = useGame({
     gameId: config.id,
@@ -44,8 +47,8 @@ export function GameShell({ config, difficulty: initialDifficulty = 1, onChainFi
   if (state.status === 'idle' || state.status === 'instructions') {
     return (
       <GameInstructions
-        name={config.name}
-        description={config.description}
+        name={GAME_I18N[config.id] ? t(GAME_I18N[config.id].name) : config.name}
+        description={GAME_I18N[config.id] ? t(GAME_I18N[config.id].description) : config.description}
         icon={config.icon}
         color={config.color}
         maxLevel={config.maxLevel}

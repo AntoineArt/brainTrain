@@ -3,13 +3,15 @@
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Card } from '@/components/ui/Card';
-import { GAME_REGISTRY } from '@/games/registry';
-import { SKILL_LABELS } from '@/lib/constants';
+import { GAME_REGISTRY, GAME_I18N } from '@/games/registry';
+import { SKILL_LABEL_KEYS } from '@/lib/constants';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function GamesPage() {
+  const { t } = useTranslation();
   return (
     <>
-      <Header title="Mini-jeux" />
+      <Header title={t('games.title')} />
       <div className="px-4 py-3 space-y-3">
         {/* Chain mode CTA */}
         <Link href="/games/chain" className="block animate-fade-in">
@@ -17,8 +19,8 @@ export default function GamesPage() {
             <div className="flex items-center gap-3">
               <span className="text-2xl">🔀</span>
               <div>
-                <h3 className="font-bold text-sm tracking-tight">Mode Enchaînement</h3>
-                <p className="text-xs text-muted">Enchaîne les mini-jeux aléatoirement !</p>
+                <h3 className="font-bold text-sm tracking-tight">{t('games.chainMode')}</h3>
+                <p className="text-xs text-muted">{t('games.chainDescription')}</p>
               </div>
             </div>
           </Card>
@@ -35,7 +37,7 @@ export default function GamesPage() {
                   >
                     {game.icon}
                   </div>
-                  <h3 className="font-bold text-xs leading-tight tracking-tight">{game.name}</h3>
+                  <h3 className="font-bold text-xs leading-tight tracking-tight">{t(GAME_I18N[game.id].name)}</h3>
                   <div className="flex flex-wrap justify-center gap-0.5">
                     {game.skills.map((skill) => (
                       <span
@@ -46,7 +48,7 @@ export default function GamesPage() {
                           color: `var(--skill-${skill})`,
                         }}
                       >
-                        {SKILL_LABELS[skill]}
+                        {t(SKILL_LABEL_KEYS[skill])}
                       </span>
                     ))}
                   </div>

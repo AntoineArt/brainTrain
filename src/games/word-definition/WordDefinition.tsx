@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { DifficultyLevel } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 import { TextInput } from '@/components/game/TextInput';
 import { getQuestion, checkAnswer, buildHint, getRandomUnrevealedIndex, type DefQuestion } from './logic';
 import { LEVEL_CONFIG } from './config';
@@ -17,10 +18,11 @@ interface Props {
 const HINT_TIME_PENALTY_MS = 3000; // Each hint adds 3s to reported response time
 
 export default function WordDefinition({ difficulty, onAnswer, timeRemaining, isPaused }: Props) {
+  const { t, locale } = useTranslation();
   const config = LEVEL_CONFIG[difficulty];
   const usedIdsRef = useRef(new Set<string>());
   const [question, setQuestion] = useState<DefQuestion | null>(() =>
-    getQuestion(difficulty, usedIdsRef.current),
+    getQuestion(difficulty, usedIdsRef.current, locale),
   );
   const [input, setInput] = useState('');
   const [hintsUsed, setHintsUsed] = useState(0);
@@ -29,7 +31,7 @@ export default function WordDefinition({ difficulty, onAnswer, timeRemaining, is
   const roundStartRef = useRef(Date.now());
 
   const nextQuestion = useCallback(() => {
-    const q = getQuestion(difficulty, usedIdsRef.current);
+    const q = getQuestion(difficulty, usedIdsRef.current, locale);
     if (q) usedIdsRef.current.add(q.id);
     setQuestion(q);
     setInput('');
@@ -37,7 +39,7 @@ export default function WordDefinition({ difficulty, onAnswer, timeRemaining, is
     setRevealedIndices(new Set());
     setFeedback(null);
     roundStartRef.current = Date.now();
-  }, [difficulty]);
+  }, [difficulty, locale]);
 
   useEffect(() => {
     usedIdsRef.current.clear();
@@ -85,7 +87,7 @@ export default function WordDefinition({ difficulty, onAnswer, timeRemaining, is
 
         {/* Word length indicator */}
         <span className="text-xs text-muted">
-          {wordLetterCount} lettres
+          {t('wordDefinition.letters', { count: wordLetterCount })}
         </span>
 
         {/* Hint display — only visible after first hint */}
@@ -107,21 +109,21 @@ export default function WordDefinition({ difficulty, onAnswer, timeRemaining, is
               disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <span>💡</span>
-            <span>Indice{hintsUsed > 0 ? ` (${hintsUsed})` : ''}</span>
+            <span>{hintsUsed > 0 ? t('wordDefinition.hintCount', { count: hintsUsed }) : t('wordDefinition.hint')}</span>
           </button>
         )}
 
         {/* Feedback */}
         {feedback === 'correct' && (
           <div className="text-success font-bold text-lg animate-fade-in-up">
-            Correct !
+            {t('game.correct')}
           </div>
         )}
         {feedback === 'wrong' && (
           <div className="flex flex-col items-center gap-1 animate-fade-in-up">
-            <span className="text-error font-bold text-lg">Raté !</span>
+            <span className="text-error font-bold text-lg">{t('game.wrong')}</span>
             <span className="text-sm text-muted">
-              Le mot était : <strong className="text-foreground">{question.word}</strong>
+              {t('wordDefinition.wordWas')} <strong className="text-foreground">{question.word}</strong>
             </span>
           </div>
         )}
@@ -133,7 +135,7 @@ export default function WordDefinition({ difficulty, onAnswer, timeRemaining, is
         onChange={setInput}
         onSubmit={handleSubmit}
         disabled={feedback !== null || isPaused}
-        placeholder={`${wordLetterCount} lettres…`}
+        placeholder={t('wordDefinition.letters', { count: wordLetterCount }) + '\u2026'}
       />
     </div>
   );

@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/Button';
+import { useTranslation } from '@/hooks/useTranslation';
 import { formatScore } from '@/lib/utils';
 import { calculateAccuracy } from '@/lib/scoring';
 
@@ -21,40 +22,41 @@ export function GameOverScreen({
   onReplay,
   onQuit,
 }: GameOverScreenProps) {
+  const { t } = useTranslation();
   const accuracy = calculateAccuracy(correctAnswers, totalAnswers);
 
   return (
     <div className="flex flex-col items-center justify-center h-[calc(100dvh-60px)] px-6 text-center gap-5">
-      <h2 className="text-lg font-bold text-muted animate-fade-in tracking-tight">Terminé !</h2>
+      <h2 className="text-lg font-bold text-muted animate-fade-in tracking-tight">{t('game.finished')}</h2>
 
       <div className="animate-bounce-in">
         <div className="font-mono text-5xl font-extrabold accent-text tabular-nums tracking-tighter">
           {formatScore(score)}
         </div>
-        <p className="text-xs text-muted mt-1 uppercase tracking-widest">points</p>
+        <p className="text-xs text-muted mt-1 uppercase tracking-widest">{t('game.points')}</p>
       </div>
 
       <div className="grid grid-cols-3 gap-3 w-full max-w-sm animate-fade-in-up stagger-2">
         <div className="bg-surface-light rounded-xl p-3 flex flex-col items-center border border-border/50">
           <span className="font-mono text-lg font-bold">{correctAnswers}/{totalAnswers}</span>
-          <span className="text-[10px] text-muted uppercase tracking-wider">Réponses</span>
+          <span className="text-[10px] text-muted uppercase tracking-wider">{t('game.answers')}</span>
         </div>
         <div className="bg-surface-light rounded-xl p-3 flex flex-col items-center border border-border/50">
           <span className="font-mono text-lg font-bold text-secondary">{accuracy}%</span>
-          <span className="text-[10px] text-muted uppercase tracking-wider">Précision</span>
+          <span className="text-[10px] text-muted uppercase tracking-wider">{t('results.accuracy')}</span>
         </div>
         <div className="bg-surface-light rounded-xl p-3 flex flex-col items-center border border-border/50">
           <span className="font-mono text-lg font-bold text-warning">{bestStreak}</span>
-          <span className="text-[10px] text-muted uppercase tracking-wider">Série max</span>
+          <span className="text-[10px] text-muted uppercase tracking-wider">{t('game.bestStreak')}</span>
         </div>
       </div>
 
       <div className="flex gap-3 w-full max-w-sm animate-fade-in-up stagger-3">
         <Button variant="secondary" onClick={onQuit} className="flex-1">
-          Quitter
+          {t('game.quit')}
         </Button>
         <Button onClick={onReplay} className="flex-1">
-          Rejouer
+          {t('game.replay')}
         </Button>
       </div>
     </div>

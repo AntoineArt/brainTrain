@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useCallback } from 'react';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface NumericKeypadProps {
   value: string;
@@ -9,6 +10,7 @@ interface NumericKeypadProps {
 }
 
 export function NumericKeypad({ value, onChange, onSubmit }: NumericKeypadProps) {
+  const { t } = useTranslation();
   const handleKey = useCallback((key: string) => {
     if (key === 'delete') {
       onChange(value.slice(0, -1));
@@ -86,7 +88,7 @@ export function NumericKeypad({ value, onChange, onSubmit }: NumericKeypadProps)
           transition-all duration-100 touch-manipulation cursor-pointer active:scale-[0.97]
           disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none"
       >
-        Valider
+        {t('game.validate')}
       </button>
     </div>
   );

@@ -1,7 +1,26 @@
 import type { DifficultyLevel } from '@/types';
+import type { Locale } from '@/locales';
 import { shuffle } from '@/lib/utils';
 import { DEF_WORDS, type DefWord } from './words';
 import { LEVEL_CONFIG } from './config';
+
+// Lazy-loaded English definitions
+let enDefWords: DefWord[] | null = null;
+function getEnDefWords(): DefWord[] {
+  if (!enDefWords) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      enDefWords = require('./words.en').EN_DEF_WORDS;
+    } catch {
+      enDefWords = [];
+    }
+  }
+  return enDefWords!;
+}
+
+function getDefWordPool(locale: Locale): DefWord[] {
+  return locale === 'en' ? getEnDefWords() : DEF_WORDS;
+}
 
 export interface DefQuestion {
   id: string;
@@ -9,7 +28,7 @@ export interface DefQuestion {
   definition: string;
 }
 
-/** Strip French diacritics and lowercase */
+/** Strip diacritics and lowercase */
 export function normalizeText(text: string): string {
   return text
     .toLowerCase()
@@ -72,14 +91,19 @@ export function getRandomUnrevealedIndex(word: string, revealedIndices: Set<numb
   return candidates[Math.floor(Math.random() * candidates.length)];
 }
 
-export function getQuestion(difficulty: DifficultyLevel, usedIds: Set<string>): DefQuestion | null {
+export function getQuestion(
+  difficulty: DifficultyLevel,
+  usedIds: Set<string>,
+  locale: Locale = 'fr',
+): DefQuestion | null {
   const config = LEVEL_CONFIG[difficulty];
-  const pool = DEF_WORDS.filter(
+  const allWords = getDefWordPool(locale);
+  const pool = allWords.filter(
     (q) => q.difficulty === config.wordDifficulty && !usedIds.has(q.id),
   );
 
   if (pool.length === 0) {
-    const fallback = DEF_WORDS.filter((q) => !usedIds.has(q.id));
+    const fallback = allWords.filter((q) => !usedIds.has(q.id));
     if (fallback.length === 0) return null;
     const picked = shuffle(fallback)[0];
     return { id: picked.id, word: picked.word, definition: picked.definition };

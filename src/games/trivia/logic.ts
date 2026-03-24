@@ -1,7 +1,26 @@
 import type { DifficultyLevel } from '@/types';
+import type { Locale } from '@/locales';
 import { shuffle } from '@/lib/utils';
 import { QUESTIONS, type QuizQuestion } from './questions';
 import { LEVEL_CONFIG, type QuizCategory } from './config';
+
+// Lazy-loaded English questions
+let enQuestions: QuizQuestion[] | null = null;
+function getEnQuestions(): QuizQuestion[] {
+  if (!enQuestions) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      enQuestions = require('./questions.en').EN_QUESTIONS;
+    } catch {
+      enQuestions = [];
+    }
+  }
+  return enQuestions!;
+}
+
+function getQuestionPool(locale: Locale): QuizQuestion[] {
+  return locale === 'en' ? getEnQuestions() : QUESTIONS;
+}
 
 export interface ShuffledQuizQuestion extends Omit<QuizQuestion, 'choices' | 'correctIndex'> {
   choices: [string, string, string, string];
@@ -19,10 +38,12 @@ export function getQuestion(
   difficulty: DifficultyLevel,
   usedIds: Set<string>,
   categoryFilter?: QuizCategory,
+  locale: Locale = 'fr',
 ): ShuffledQuizQuestion | null {
   const config = LEVEL_CONFIG[difficulty];
+  const allQuestions = getQuestionPool(locale);
 
-  let pool = QUESTIONS.filter(
+  let pool = allQuestions.filter(
     (q) => q.difficulty === config.difficultyFilter && !usedIds.has(q.id),
   );
 
@@ -32,7 +53,7 @@ export function getQuestion(
 
   if (pool.length === 0) {
     // Fallback: any difficulty not yet used
-    pool = QUESTIONS.filter((q) => !usedIds.has(q.id));
+    pool = allQuestions.filter((q) => !usedIds.has(q.id));
     if (categoryFilter) {
       pool = pool.filter((q) => q.category === categoryFilter);
     }

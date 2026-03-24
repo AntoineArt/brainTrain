@@ -1,0 +1,105 @@
+export interface WordQuestion {
+  word: string;
+  type: 'synonym' | 'antonym' | 'definition';
+  question: string;
+  options: [string, string, string, string];
+  correctIndex: number;
+  difficulty: 'easy' | 'medium' | 'hard' | 'expert' | 'master';
+}
+
+export const EN_WORD_QUESTIONS: WordQuestion[] = [
+  // === EASY ===
+  { word: 'happy', type: 'synonym', question: 'Synonym of "happy"', options: ['Joyful', 'Sad', 'Tired', 'Angry'], correctIndex: 0, difficulty: 'easy' },
+  { word: 'fast', type: 'synonym', question: 'Synonym of "fast"', options: ['Slow', 'Quick', 'Heavy', 'Soft'], correctIndex: 1, difficulty: 'easy' },
+  { word: 'big', type: 'antonym', question: 'Antonym of "big"', options: ['Large', 'Huge', 'Small', 'Wide'], correctIndex: 2, difficulty: 'easy' },
+  { word: 'hot', type: 'antonym', question: 'Antonym of "hot"', options: ['Warm', 'Burning', 'Sunny', 'Cold'], correctIndex: 3, difficulty: 'easy' },
+  { word: 'beautiful', type: 'synonym', question: 'Synonym of "beautiful"', options: ['Lovely', 'Ugly', 'Dark', 'Rough'], correctIndex: 0, difficulty: 'easy' },
+  { word: 'sad', type: 'antonym', question: 'Antonym of "sad"', options: ['Gloomy', 'Cheerful', 'Moody', 'Quiet'], correctIndex: 1, difficulty: 'easy' },
+  { word: 'begin', type: 'synonym', question: 'Synonym of "begin"', options: ['Finish', 'Stop', 'Start', 'End'], correctIndex: 2, difficulty: 'easy' },
+  { word: 'old', type: 'antonym', question: 'Antonym of "old"', options: ['Ancient', 'Worn', 'Classic', 'New'], correctIndex: 3, difficulty: 'easy' },
+  { word: 'strong', type: 'synonym', question: 'Synonym of "strong"', options: ['Powerful', 'Weak', 'Thin', 'Light'], correctIndex: 0, difficulty: 'easy' },
+  { word: 'give', type: 'antonym', question: 'Antonym of "give"', options: ['Offer', 'Take', 'Share', 'Lend'], correctIndex: 1, difficulty: 'easy' },
+  { word: 'friend', type: 'antonym', question: 'Antonym of "friend"', options: ['Companion', 'Neighbor', 'Enemy', 'Stranger'], correctIndex: 2, difficulty: 'easy' },
+  { word: 'laugh', type: 'antonym', question: 'Antonym of "laugh"', options: ['Smile', 'Shout', 'Sing', 'Cry'], correctIndex: 3, difficulty: 'easy' },
+  { word: 'house', type: 'synonym', question: 'Synonym of "house"', options: ['Dwelling', 'Garden', 'Road', 'Bridge'], correctIndex: 0, difficulty: 'easy' },
+  { word: 'afraid', type: 'definition', question: 'What does "afraid" mean?', options: ['Intense joy', 'Feeling fear', 'Feeling sleepy', 'Silent anger'], correctIndex: 1, difficulty: 'easy' },
+  { word: 'mistake', type: 'definition', question: 'What does "mistake" mean?', options: ['A success', 'A victory', 'An unintentional error', 'A discovery'], correctIndex: 2, difficulty: 'easy' },
+  { word: 'pretty', type: 'definition', question: 'What does "pretty" mean?', options: ['Very large', 'Noisy', 'Boring', 'Pleasant to look at'], correctIndex: 3, difficulty: 'easy' },
+  { word: 'easy', type: 'antonym', question: 'Antonym of "easy"', options: ['Difficult', 'Simple', 'Clear', 'Plain'], correctIndex: 0, difficulty: 'easy' },
+
+  // === MEDIUM ===
+  { word: 'generous', type: 'synonym', question: 'Synonym of "generous"', options: ['Liberal', 'Stingy', 'Careful', 'Timid'], correctIndex: 0, difficulty: 'medium' },
+  { word: 'brief', type: 'antonym', question: 'Antonym of "brief"', options: ['Short', 'Lengthy', 'Quick', 'Tiny'], correctIndex: 1, difficulty: 'medium' },
+  { word: 'diligent', type: 'definition', question: 'What does "diligent" mean?', options: ['Lazy', 'Careless', 'Hardworking and careful', 'Reckless'], correctIndex: 2, difficulty: 'medium' },
+  { word: 'reluctant', type: 'synonym', question: 'Synonym of "reluctant"', options: ['Eager', 'Willing', 'Ready', 'Hesitant'], correctIndex: 3, difficulty: 'medium' },
+  { word: 'candid', type: 'definition', question: 'What does "candid" mean?', options: ['Honest and straightforward', 'Secretive', 'Deceitful', 'Cautious'], correctIndex: 0, difficulty: 'medium' },
+  { word: 'trivial', type: 'antonym', question: 'Antonym of "trivial"', options: ['Minor', 'Significant', 'Petty', 'Slight'], correctIndex: 1, difficulty: 'medium' },
+  { word: 'eloquent', type: 'definition', question: 'What does "eloquent" mean?', options: ['Silent', 'Clumsy', 'Fluent and persuasive in speech', 'Mumbling'], correctIndex: 2, difficulty: 'medium' },
+  { word: 'thrifty', type: 'synonym', question: 'Synonym of "thrifty"', options: ['Wasteful', 'Lavish', 'Careless', 'Frugal'], correctIndex: 3, difficulty: 'medium' },
+  { word: 'meticulous', type: 'synonym', question: 'Synonym of "meticulous"', options: ['Thorough', 'Sloppy', 'Hasty', 'Vague'], correctIndex: 0, difficulty: 'medium' },
+  { word: 'arrogant', type: 'antonym', question: 'Antonym of "arrogant"', options: ['Proud', 'Humble', 'Boastful', 'Vain'], correctIndex: 1, difficulty: 'medium' },
+  { word: 'pragmatic', type: 'definition', question: 'What does "pragmatic" mean?', options: ['Dreamy', 'Idealistic', 'Focused on practical results', 'Unrealistic'], correctIndex: 2, difficulty: 'medium' },
+  { word: 'verbose', type: 'antonym', question: 'Antonym of "verbose"', options: ['Wordy', 'Lengthy', 'Rambling', 'Concise'], correctIndex: 3, difficulty: 'medium' },
+  { word: 'steadfast', type: 'synonym', question: 'Synonym of "steadfast"', options: ['Unwavering', 'Fickle', 'Indecisive', 'Wavering'], correctIndex: 0, difficulty: 'medium' },
+  { word: 'ephemeral', type: 'definition', question: 'What does "ephemeral" mean?', options: ['Eternal', 'Lasting only a short time', 'Permanent', 'Solid'], correctIndex: 1, difficulty: 'medium' },
+  { word: 'placate', type: 'synonym', question: 'Synonym of "placate"', options: ['Provoke', 'Anger', 'Soothe', 'Irritate'], correctIndex: 2, difficulty: 'medium' },
+  { word: 'benign', type: 'antonym', question: 'Antonym of "benign"', options: ['Gentle', 'Kind', 'Mild', 'Malignant'], correctIndex: 3, difficulty: 'medium' },
+  { word: 'astute', type: 'definition', question: 'What does "astute" mean?', options: ['Shrewd and perceptive', 'Foolish', 'Gullible', 'Naive'], correctIndex: 0, difficulty: 'medium' },
+
+  // === HARD ===
+  { word: 'benevolent', type: 'antonym', question: 'Antonym of "benevolent"', options: ['Malevolent', 'Generous', 'Kind', 'Charitable'], correctIndex: 0, difficulty: 'hard' },
+  { word: 'perfidious', type: 'definition', question: 'What does "perfidious" mean?', options: ['Loyal', 'Deceitful and untrustworthy', 'Honest', 'Brave'], correctIndex: 1, difficulty: 'hard' },
+  { word: 'recalcitrant', type: 'synonym', question: 'Synonym of "recalcitrant"', options: ['Obedient', 'Submissive', 'Defiant', 'Meek'], correctIndex: 2, difficulty: 'hard' },
+  { word: 'taciturn', type: 'antonym', question: 'Antonym of "taciturn"', options: ['Silent', 'Quiet', 'Reserved', 'Garrulous'], correctIndex: 3, difficulty: 'hard' },
+  { word: 'acrimonious', type: 'definition', question: 'What does "acrimonious" mean?', options: ['Bitter and sharp in manner', 'Gentle', 'Soothing', 'Harmonious'], correctIndex: 0, difficulty: 'hard' },
+  { word: 'capricious', type: 'synonym', question: 'Synonym of "capricious"', options: ['Steady', 'Fickle', 'Reliable', 'Constant'], correctIndex: 1, difficulty: 'hard' },
+  { word: 'pernicious', type: 'definition', question: 'What does "pernicious" mean?', options: ['Helpful', 'Safe', 'Causing great harm gradually', 'Healing'], correctIndex: 2, difficulty: 'hard' },
+  { word: 'audacious', type: 'synonym', question: 'Synonym of "audacious"', options: ['Timid', 'Cautious', 'Shy', 'Bold'], correctIndex: 3, difficulty: 'hard' },
+  { word: 'magnanimous', type: 'definition', question: 'What does "magnanimous" mean?', options: ['Generous and forgiving', 'Petty', 'Vengeful', 'Selfish'], correctIndex: 0, difficulty: 'hard' },
+  { word: 'ostentatious', type: 'antonym', question: 'Antonym of "ostentatious"', options: ['Showy', 'Understated', 'Flashy', 'Gaudy'], correctIndex: 1, difficulty: 'hard' },
+  { word: 'obsequious', type: 'definition', question: 'What does "obsequious" mean?', options: ['Defiant', 'Rude', 'Excessively submissive and flattering', 'Independent'], correctIndex: 2, difficulty: 'hard' },
+  { word: 'vindictive', type: 'synonym', question: 'Synonym of "vindictive"', options: ['Forgiving', 'Merciful', 'Gentle', 'Vengeful'], correctIndex: 3, difficulty: 'hard' },
+  { word: 'cogent', type: 'synonym', question: 'Synonym of "cogent"', options: ['Compelling', 'Weak', 'Confusing', 'Vague'], correctIndex: 0, difficulty: 'hard' },
+  { word: 'insidious', type: 'definition', question: 'What does "insidious" mean?', options: ['Obvious', 'Treacherous in a subtle way', 'Harmless', 'Direct'], correctIndex: 1, difficulty: 'hard' },
+  { word: 'parsimonious', type: 'antonym', question: 'Antonym of "parsimonious"', options: ['Stingy', 'Miserly', 'Lavish', 'Frugal'], correctIndex: 2, difficulty: 'hard' },
+  { word: 'perspicacious', type: 'definition', question: 'What does "perspicacious" mean?', options: ['Dull', 'Confused', 'Ignorant', 'Having keen insight'], correctIndex: 3, difficulty: 'hard' },
+  { word: 'deleterious', type: 'synonym', question: 'Synonym of "deleterious"', options: ['Harmful', 'Beneficial', 'Healthy', 'Nourishing'], correctIndex: 0, difficulty: 'hard' },
+
+  // === EXPERT ===
+  { word: 'pusillanimous', type: 'definition', question: 'What does "pusillanimous" mean?', options: ['Cowardly and timid', 'Brave', 'Reckless', 'Bold'], correctIndex: 0, difficulty: 'expert' },
+  { word: 'mendacious', type: 'synonym', question: 'Synonym of "mendacious"', options: ['Truthful', 'Dishonest', 'Reliable', 'Sincere'], correctIndex: 1, difficulty: 'expert' },
+  { word: 'sycophantic', type: 'definition', question: 'What does "sycophantic" mean?', options: ['Independent', 'Defiant', 'Servilely flattering', 'Honest'], correctIndex: 2, difficulty: 'expert' },
+  { word: 'pulchritudinous', type: 'definition', question: 'What does "pulchritudinous" mean?', options: ['Ugly', 'Frightening', 'Ordinary', 'Physically beautiful'], correctIndex: 3, difficulty: 'expert' },
+  { word: 'tergiversate', type: 'definition', question: 'What does "tergiversate" mean?', options: ['To be evasive or equivocate', 'To be direct', 'To speak clearly', 'To decide quickly'], correctIndex: 0, difficulty: 'expert' },
+  { word: 'propitious', type: 'antonym', question: 'Antonym of "propitious"', options: ['Lucky', 'Inauspicious', 'Favorable', 'Timely'], correctIndex: 1, difficulty: 'expert' },
+  { word: 'vituperative', type: 'synonym', question: 'Synonym of "vituperative"', options: ['Praising', 'Kind', 'Abusive', 'Gentle'], correctIndex: 2, difficulty: 'expert' },
+  { word: 'unctuous', type: 'definition', question: 'What does "unctuous" mean?', options: ['Dry', 'Honest', 'Blunt', 'Excessively smooth and ingratiating'], correctIndex: 3, difficulty: 'expert' },
+  { word: 'contumacious', type: 'definition', question: 'What does "contumacious" mean?', options: ['Stubbornly disobedient', 'Compliant', 'Agreeable', 'Submissive'], correctIndex: 0, difficulty: 'expert' },
+  { word: 'verisimilitude', type: 'definition', question: 'What does "verisimilitude" mean?', options: ['Falsehood', 'The appearance of being true', 'A confirmed fact', 'An obvious lie'], correctIndex: 1, difficulty: 'expert' },
+  { word: 'supercilious', type: 'synonym', question: 'Synonym of "supercilious"', options: ['Humble', 'Friendly', 'Haughty', 'Modest'], correctIndex: 2, difficulty: 'expert' },
+  { word: 'recondite', type: 'antonym', question: 'Antonym of "recondite"', options: ['Obscure', 'Hidden', 'Abstruse', 'Accessible'], correctIndex: 3, difficulty: 'expert' },
+  { word: 'inimical', type: 'antonym', question: 'Antonym of "inimical"', options: ['Friendly', 'Hostile', 'Harmful', 'Adverse'], correctIndex: 0, difficulty: 'expert' },
+  { word: 'opprobrium', type: 'definition', question: 'What does "opprobrium" mean?', options: ['Honor', 'Public disgrace and shame', 'Praise', 'Reward'], correctIndex: 1, difficulty: 'expert' },
+  { word: 'circumlocution', type: 'definition', question: 'What does "circumlocution" mean?', options: ['Brevity', 'Directness', 'Using many words to say something simple', 'Silence'], correctIndex: 2, difficulty: 'expert' },
+  { word: 'plenipotentiary', type: 'definition', question: 'What does "plenipotentiary" mean?', options: ['A servant', 'A student', 'A prisoner', 'A diplomat with full authority'], correctIndex: 3, difficulty: 'expert' },
+  { word: 'nugatory', type: 'synonym', question: 'Synonym of "nugatory"', options: ['Worthless', 'Valuable', 'Important', 'Significant'], correctIndex: 0, difficulty: 'expert' },
+
+  // === MASTER ===
+  { word: 'loquacious', type: 'definition', question: 'Definition: "Excessively talkative"', options: ['Loquacious', 'Taciturn', 'Reticent', 'Laconic'], correctIndex: 0, difficulty: 'master' },
+  { word: 'anodyne', type: 'definition', question: 'What does "anodyne" mean?', options: ['Painful', 'Unlikely to cause offense or disagreement', 'Provocative', 'Dangerous'], correctIndex: 1, difficulty: 'master' },
+  { word: 'sesquipedalian', type: 'definition', question: 'What does "sesquipedalian" mean?', options: ['Brief', 'Simple', 'Characterized by long words', 'Monosyllabic'], correctIndex: 2, difficulty: 'master' },
+  { word: 'antediluvian', type: 'synonym', question: 'Synonym of "antediluvian"', options: ['Modern', 'Current', 'Fresh', 'Ancient'], correctIndex: 3, difficulty: 'master' },
+  { word: 'bathetic', type: 'definition', question: 'What does "bathetic" mean?', options: ['Producing an unintentional effect of anticlimax', 'Sublime', 'Inspiring', 'Elevated'], correctIndex: 0, difficulty: 'master' },
+  { word: 'feckless', type: 'antonym', question: 'Antonym of "feckless"', options: ['Irresponsible', 'Competent', 'Useless', 'Careless'], correctIndex: 1, difficulty: 'master' },
+  { word: 'defenestrate', type: 'definition', question: 'What does "defenestrate" mean?', options: ['To decorate', 'To celebrate', 'To throw out of a window', 'To demolish'], correctIndex: 2, difficulty: 'master' },
+  { word: 'callipygian', type: 'definition', question: 'What does "callipygian" mean?', options: ['Having ugly feet', 'Being tall', 'Being thin', 'Having well-shaped buttocks'], correctIndex: 3, difficulty: 'master' },
+  { word: 'periphrastic', type: 'definition', question: 'What does "periphrastic" mean?', options: ['Using indirect or roundabout expression', 'Concise', 'Direct', 'Clear'], correctIndex: 0, difficulty: 'master' },
+  { word: 'velleity', type: 'definition', question: 'What does "velleity" mean?', options: ['Strong determination', 'A wish without effort to achieve it', 'Fierce ambition', 'Complete apathy'], correctIndex: 1, difficulty: 'master' },
+  { word: 'logorrhoea', type: 'synonym', question: 'Synonym of "logorrhoea"', options: ['Silence', 'Brevity', 'Excessive talkativeness', 'Precision'], correctIndex: 2, difficulty: 'master' },
+  { word: 'stochastic', type: 'definition', question: 'What does "stochastic" mean?', options: ['Predictable', 'Certain', 'Fixed', 'Randomly determined'], correctIndex: 3, difficulty: 'master' },
+  { word: 'apodictic', type: 'definition', question: 'What does "apodictic" mean?', options: ['Clearly established beyond dispute', 'Doubtful', 'Uncertain', 'Debatable'], correctIndex: 0, difficulty: 'master' },
+  { word: 'proleptic', type: 'definition', question: 'What does "proleptic" mean?', options: ['Backward-looking', 'Anticipating future events', 'Present-focused', 'Nostalgic'], correctIndex: 1, difficulty: 'master' },
+  { word: 'apophasis', type: 'definition', question: 'What does "apophasis" mean?', options: ['Direct praise', 'An affirmation', 'Raising a subject by denying it should be discussed', 'Open criticism'], correctIndex: 2, difficulty: 'master' },
+  { word: 'tmesis', type: 'definition', question: 'What does "tmesis" mean?', options: ['A rhyme scheme', 'A metaphor', 'An allusion', 'Inserting a word into the middle of another'], correctIndex: 3, difficulty: 'master' },
+  { word: 'syzygy', type: 'definition', question: 'What does "syzygy" mean?', options: ['An alignment of three celestial bodies', 'A type of eclipse', 'A lunar phase', 'A constellation'], correctIndex: 0, difficulty: 'master' },
+];

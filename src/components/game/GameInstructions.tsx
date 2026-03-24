@@ -2,15 +2,8 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import { useTranslation } from '@/hooks/useTranslation';
 import type { DifficultyLevel } from '@/types';
-
-const DIFFICULTY_LABELS: Record<DifficultyLevel, string> = {
-  1: 'Facile',
-  2: 'Moyen',
-  3: 'Difficile',
-  4: 'Expert',
-  5: 'Maître',
-};
 
 interface GameInstructionsProps {
   name: string;
@@ -23,6 +16,7 @@ interface GameInstructionsProps {
 }
 
 export function GameInstructions({ name, description, icon, color, maxLevel, initialDifficulty, onStart }: GameInstructionsProps) {
+  const { t } = useTranslation();
   const [difficulty, setDifficulty] = useState<DifficultyLevel>(initialDifficulty);
   const levels = ([1, 2, 3, 4, 5] as DifficultyLevel[]).filter((l) => l <= maxLevel);
 
@@ -41,7 +35,7 @@ export function GameInstructions({ name, description, icon, color, maxLevel, ini
 
       {/* Difficulty selector */}
       <div className="w-full max-w-xs animate-fade-in-up stagger-2">
-        <p className="text-xs text-muted font-semibold uppercase tracking-widest mb-2">Difficulté</p>
+        <p className="text-xs text-muted font-semibold uppercase tracking-widest mb-2">{t('difficulty.label')}</p>
         <div className="flex gap-1.5">
           {levels.map((level) => (
             <button
@@ -56,14 +50,14 @@ export function GameInstructions({ name, description, icon, color, maxLevel, ini
                 }
               `}
             >
-              {DIFFICULTY_LABELS[level]}
+              {t(`difficulty.${level}` as any)}
             </button>
           ))}
         </div>
       </div>
 
       <Button size="lg" onClick={() => onStart(difficulty)} className="w-full max-w-xs animate-fade-in-up stagger-3">
-        Jouer
+        {t('game.play')}
       </Button>
     </div>
   );

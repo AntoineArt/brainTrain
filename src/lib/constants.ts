@@ -1,13 +1,14 @@
 import type { CognitiveSkill } from '@/types';
+import type { TranslationKey } from '@/locales';
 
-export const SKILL_LABELS: Record<CognitiveSkill, string> = {
-  math: 'Calcul',
-  memory: 'Mémoire',
-  logic: 'Logique',
-  speed: 'Vitesse',
-  language: 'Langage',
-  attention: 'Attention',
-  culture: 'Culture G',
+export const SKILL_LABEL_KEYS: Record<CognitiveSkill, TranslationKey> = {
+  math: 'skill.math',
+  memory: 'skill.memory',
+  logic: 'skill.logic',
+  speed: 'skill.speed',
+  language: 'skill.language',
+  attention: 'skill.attention',
+  culture: 'skill.culture',
 };
 
 export const SKILL_COLORS: Record<CognitiveSkill, string> = {

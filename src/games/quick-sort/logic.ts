@@ -1,5 +1,6 @@
 import type { DifficultyLevel } from '@/types';
 import { randomInt, shuffle } from '@/lib/utils';
+import { translate, type Locale } from '@/locales';
 import { LEVEL_CONFIG } from './config';
 
 export interface SortPuzzle {
@@ -9,9 +10,13 @@ export interface SortPuzzle {
   reverse: boolean;
 }
 
-const MONTHS = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+function getMonths(locale: Locale): string[] {
+  return Array.from({ length: 12 }, (_, i) =>
+    translate(locale, `month.${i + 1}` as Parameters<typeof translate>[1]),
+  );
+}
 
-export function generatePuzzle(difficulty: DifficultyLevel): SortPuzzle {
+export function generatePuzzle(difficulty: DifficultyLevel, locale: Locale = 'fr'): SortPuzzle {
   const config = LEVEL_CONFIG[difficulty];
   const reverse = config.allowReverse && Math.random() > 0.5;
 
@@ -20,13 +25,16 @@ export function generatePuzzle(difficulty: DifficultyLevel): SortPuzzle {
 
   if (config.type === 'mixed' && Math.random() > 0.5) {
     // Sort months
+    const months = getMonths(locale);
     const startIdx = randomInt(0, 12 - config.itemCount);
     const monthIndices = Array.from({ length: config.itemCount }, (_, i) => startIdx + i);
     items = monthIndices.map((idx) => ({
-      value: MONTHS[idx],
+      value: months[idx],
       sortKey: idx,
     }));
-    instruction = reverse ? 'Ordre inverse des mois' : 'Ordre chronologique';
+    instruction = reverse
+      ? translate(locale, 'quickSort.reverseChronological')
+      : translate(locale, 'quickSort.chronological');
   } else {
     // Sort numbers
     const numbers = new Set<number>();
@@ -37,7 +45,9 @@ export function generatePuzzle(difficulty: DifficultyLevel): SortPuzzle {
       value: String(n),
       sortKey: n,
     }));
-    instruction = reverse ? 'Ordre décroissant' : 'Ordre croissant';
+    instruction = reverse
+      ? translate(locale, 'quickSort.descending')
+      : translate(locale, 'quickSort.ascending');
   }
 
   // Correct order (before shuffling)

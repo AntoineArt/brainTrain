@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { DifficultyLevel } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 import { Button } from '@/components/ui/Button';
 import { generatePuzzle, checkOrder, type SortPuzzle } from './logic';
 
@@ -14,17 +15,18 @@ interface Props {
 }
 
 export default function QuickSort({ difficulty, onAnswer, timeRemaining }: Props) {
-  const [puzzle, setPuzzle] = useState<SortPuzzle>(() => generatePuzzle(difficulty));
+  const { t, locale } = useTranslation();
+  const [puzzle, setPuzzle] = useState<SortPuzzle>(() => generatePuzzle(difficulty, locale));
   const [selectedOrder, setSelectedOrder] = useState<number[]>([]);
   const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
   const roundStartRef = useRef(Date.now());
 
   const nextPuzzle = useCallback(() => {
-    setPuzzle(generatePuzzle(difficulty));
+    setPuzzle(generatePuzzle(difficulty, locale));
     setSelectedOrder([]);
     setFeedback(null);
     roundStartRef.current = Date.now();
-  }, [difficulty]);
+  }, [difficulty, locale]);
 
   useEffect(() => {
     nextPuzzle();
@@ -66,7 +68,7 @@ export default function QuickSort({ difficulty, onAnswer, timeRemaining }: Props
         {/* Selected items (answer area) */}
         <div className="flex flex-wrap gap-2 justify-center min-h-14 items-center p-3 bg-surface rounded-xl border border-border w-full max-w-sm">
           {selectedOrder.length === 0 ? (
-            <span className="text-sm text-muted">Touche les éléments dans l&apos;ordre</span>
+            <span className="text-sm text-muted">{t('quickSort.instruction')}</span>
           ) : (
             selectedOrder.map((idx, pos) => (
               <span
@@ -118,7 +120,7 @@ export default function QuickSort({ difficulty, onAnswer, timeRemaining }: Props
           disabled={selectedOrder.length === 0 || feedback !== null}
           className="w-full"
         >
-          Annuler le dernier
+          {t('quickSort.undo')}
         </Button>
       </div>
     </div>

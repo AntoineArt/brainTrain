@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { DifficultyLevel } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 import { generatePuzzle, type RotationPuzzle } from './logic';
 
 interface Props {
@@ -37,6 +38,7 @@ function ShapeGrid({ grid, cellPx }: { grid: number[][]; cellPx: number }) {
 }
 
 export default function RotationGame({ difficulty, onAnswer, timeRemaining }: Props) {
+  const { t } = useTranslation();
   const [puzzle, setPuzzle] = useState<RotationPuzzle>(() => generatePuzzle(difficulty));
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [correct, setCorrect] = useState<boolean | null>(null);
@@ -74,7 +76,7 @@ export default function RotationGame({ difficulty, onAnswer, timeRemaining }: Pr
     <div className="flex flex-col items-center justify-between h-full py-6">
       <div className="flex flex-col items-center gap-4">
         <p className="text-sm text-muted">
-          Quelle est la rotation de cette forme ?
+          {t('rotation.question')}
         </p>
 
         {/* Original shape */}
@@ -82,7 +84,7 @@ export default function RotationGame({ difficulty, onAnswer, timeRemaining }: Pr
           <ShapeGrid grid={puzzle.shape} cellPx={16} />
         </div>
 
-        <p className="text-xs text-muted">Rotation : {puzzle.rotation}°</p>
+        <p className="text-xs text-muted">{t('rotation.label', { angle: puzzle.rotation })}</p>
       </div>
 
       {/* Options */}

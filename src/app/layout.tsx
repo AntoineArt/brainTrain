@@ -3,6 +3,7 @@ import { Lexend, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { PlayerProvider } from "@/components/providers/PlayerProvider";
 import { SettingsProvider } from "@/components/providers/SettingsProvider";
+import { LocaleProvider } from "@/components/providers/LocaleProvider";
 import { BottomNav } from "@/components/layout/BottomNav";
 
 const lexend = Lexend({
@@ -47,12 +48,14 @@ export default function RootLayout({
         className={`${lexend.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
       >
         <SettingsProvider>
-          <PlayerProvider>
-            <div className="min-h-dvh flex flex-col max-w-3xl mx-auto relative">
-              <main className="flex-1 pb-14">{children}</main>
-              <BottomNav />
-            </div>
-          </PlayerProvider>
+          <LocaleProvider>
+            <PlayerProvider>
+              <div className="min-h-dvh flex flex-col max-w-3xl mx-auto relative">
+                <main className="flex-1 pb-14">{children}</main>
+                <BottomNav />
+              </div>
+            </PlayerProvider>
+          </LocaleProvider>
         </SettingsProvider>
       </body>
     </html>

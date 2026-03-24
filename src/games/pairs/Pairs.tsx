@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { DifficultyLevel } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 import { generateCards, type PairCard } from './logic';
 import { LEVEL_CONFIG } from './config';
 
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function Pairs({ difficulty, onAnswer, onComplete, timeRemaining }: Props) {
+  const { t } = useTranslation();
   const config = LEVEL_CONFIG[difficulty];
   const [cards, setCards] = useState<PairCard[]>(() => generateCards(config.pairs));
   const [flippedIds, setFlippedIds] = useState<number[]>([]);
@@ -88,7 +90,7 @@ export default function Pairs({ difficulty, onAnswer, onComplete, timeRemaining 
   return (
     <div className="flex flex-col items-center justify-center h-full gap-4 px-4">
       <p className="text-sm text-muted">
-        Paires trouvées : {matchedPairs}/{config.pairs}
+        {t('pairs.found', { found: matchedPairs, total: config.pairs })}
       </p>
 
       <div

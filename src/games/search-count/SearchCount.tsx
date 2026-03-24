@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { DifficultyLevel } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 import { AnswerOptions } from '@/components/game/AnswerOptions';
 import { generatePuzzle, type CountPuzzle } from './logic';
 
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function SearchCount({ difficulty, onAnswer, timeRemaining }: Props) {
+  const { t } = useTranslation();
   const [puzzle, setPuzzle] = useState<CountPuzzle>(() => generatePuzzle(difficulty));
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const roundStartRef = useRef(Date.now());
@@ -48,7 +50,7 @@ export default function SearchCount({ difficulty, onAnswer, timeRemaining }: Pro
     <div className="flex flex-col items-center justify-between h-full py-4">
       <div className="flex-1 flex flex-col items-center justify-center gap-4 px-4">
         <p className="text-base text-muted">
-          Combien de <span className="text-3xl align-middle">{puzzle.target}</span> ?
+          {t('searchCount.question', { target: puzzle.target })}
         </p>
 
         <div

@@ -2,15 +2,17 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-const NAV_ITEMS = [
-  { href: '/', label: 'Accueil', icon: '🏠' },
-  { href: '/games', label: 'Jeux', icon: '🎮' },
-  { href: '/results', label: 'Stats', icon: '📊' },
-];
+import { useTranslation } from '@/hooks/useTranslation';
 
 export function BottomNav() {
   const pathname = usePathname();
+  const { t } = useTranslation();
+
+  const NAV_ITEMS = [
+    { href: '/', label: t('nav.home'), icon: '🏠' },
+    { href: '/games', label: t('nav.games'), icon: '🎮' },
+    { href: '/results', label: t('nav.stats'), icon: '📊' },
+  ];
 
   if (pathname.startsWith('/games/') && pathname !== '/games') {
     return null;

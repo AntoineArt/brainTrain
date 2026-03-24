@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { DifficultyLevel } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 import { generatePuzzle, type IntrusPuzzle } from './logic';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function FindIntruder({ difficulty, onAnswer, timeRemaining }: Props) {
+  const { t } = useTranslation();
   const [puzzle, setPuzzle] = useState<IntrusPuzzle>(() => generatePuzzle(difficulty));
   const [feedback, setFeedback] = useState<number | null>(null);
   const [correct, setCorrect] = useState<boolean | null>(null);
@@ -51,7 +53,7 @@ export default function FindIntruder({ difficulty, onAnswer, timeRemaining }: Pr
 
   return (
     <div className="flex flex-col items-center justify-center h-full gap-6 px-4">
-      <p className="text-sm text-muted">Trouve l&apos;intrus !</p>
+      <p className="text-sm text-muted">{t('findIntruder.instruction')}</p>
 
       <div
         className="grid gap-2 w-full max-w-xs"

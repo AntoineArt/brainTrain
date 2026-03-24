@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { LocaleToggle } from '@/components/ui/LocaleToggle';
 
 interface HeaderProps {
   title?: string;
@@ -35,7 +36,10 @@ export function Header({ title = 'BrainTrain', showBack = false }: HeaderProps) 
             <span className="tracking-tight">{title}</span>
           )}
         </h1>
-        <ThemeToggle />
+        <div className="flex items-center gap-1.5">
+          <LocaleToggle />
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

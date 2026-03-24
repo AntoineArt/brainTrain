@@ -3,7 +3,8 @@
 import { use } from 'react';
 import { notFound } from 'next/navigation';
 import dynamic from 'next/dynamic';
-import { GAME_MAP } from '@/games/registry';
+import { GAME_MAP, GAME_I18N } from '@/games/registry';
+import { useTranslation } from '@/hooks/useTranslation';
 import { GameShell } from '@/components/game/GameShell';
 import type { GameComponentProps } from '@/types';
 
@@ -28,6 +29,7 @@ export default function GamePage({
   params: Promise<{ gameId: string }>;
 }) {
   const { gameId } = use(params);
+  const { t } = useTranslation();
   const config = GAME_MAP.get(gameId);
 
   if (!config) {
@@ -40,8 +42,8 @@ export default function GamePage({
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center gap-4">
         <span className="text-5xl">{config.icon}</span>
-        <h2 className="text-xl font-bold">{config.name}</h2>
-        <p className="text-muted">Ce jeu arrive bientôt !</p>
+        <h2 className="text-xl font-bold">{GAME_I18N[gameId]?.name ? t(GAME_I18N[gameId].name) : config.name}</h2>
+        <p className="text-muted">{t('game.comingSoon')}</p>
       </div>
     );
   }

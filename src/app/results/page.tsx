@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react';
 import { Header } from '@/components/layout/Header';
 import { Card } from '@/components/ui/Card';
 import { getItem, STORAGE_KEYS } from '@/lib/storage';
-import { GAME_REGISTRY } from '@/games/registry';
+import { GAME_REGISTRY, GAME_I18N } from '@/games/registry';
+import { useTranslation } from '@/hooks/useTranslation';
 import { formatScore } from '@/lib/utils';
 import type { GameResult } from '@/types';
 
 export default function ResultsPage() {
+  const { t, locale } = useTranslation();
   const [history, setHistory] = useState<GameResult[]>([]);
 
   useEffect(() => {
@@ -25,30 +27,30 @@ export default function ResultsPage() {
 
   return (
     <>
-      <Header title="Statistiques" />
+      <Header title={t('results.title')} />
       <div className="px-4 py-3 space-y-4">
         {/* Summary */}
         <div className="grid grid-cols-3 gap-2 animate-fade-in-up">
           <Card className="text-center p-3">
             <div className="font-mono text-xl font-bold accent-text">{totalGames}</div>
-            <div className="text-[10px] text-muted font-semibold uppercase tracking-wider">Parties</div>
+            <div className="text-[10px] text-muted font-semibold uppercase tracking-wider">{t('results.games')}</div>
           </Card>
           <Card className="text-center p-3">
             <div className="font-mono text-xl font-bold accent-text">{formatScore(totalScore)}</div>
-            <div className="text-[10px] text-muted font-semibold uppercase tracking-wider">Score total</div>
+            <div className="text-[10px] text-muted font-semibold uppercase tracking-wider">{t('results.totalScore')}</div>
           </Card>
           <Card className="text-center p-3">
             <div className="font-mono text-xl font-bold text-secondary">{avgAccuracy}%</div>
-            <div className="text-[10px] text-muted font-semibold uppercase tracking-wider">Précision</div>
+            <div className="text-[10px] text-muted font-semibold uppercase tracking-wider">{t('results.accuracy')}</div>
           </Card>
         </div>
 
         {/* History */}
         <div className="animate-fade-in-up stagger-2">
-          <h3 className="font-bold text-sm mb-2 tracking-tight">Historique</h3>
+          <h3 className="font-bold text-sm mb-2 tracking-tight">{t('results.history')}</h3>
           {history.length === 0 ? (
             <p className="text-muted text-center text-sm py-6">
-              Aucune partie jouée. Lance-toi !
+              {t('results.noGames')}
             </p>
           ) : (
             <div className="space-y-1.5">
@@ -65,9 +67,9 @@ export default function ResultsPage() {
                       {game.icon}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="font-medium text-sm truncate">{game.name}</div>
+                      <div className="font-medium text-sm truncate">{GAME_I18N[game.id]?.name ? t(GAME_I18N[game.id].name) : game.name}</div>
                       <div className="text-xs text-muted">
-                        {date.toLocaleDateString('fr-FR')} — {result.accuracy}%
+                        {date.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US')} — {result.accuracy}%
                       </div>
                     </div>
                     <div className="font-mono text-sm font-bold accent-text tabular-nums">

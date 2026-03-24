@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react';
 import type { DifficultyLevel } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 import { generateSequence, checkSequence } from './logic';
 import { LEVEL_CONFIG } from './config';
 
@@ -16,6 +17,7 @@ interface Props {
 type Phase = 'showing' | 'input' | 'feedback';
 
 export default function MemorySequence({ difficulty, onAnswer, timeRemaining }: Props) {
+  const { t } = useTranslation();
   const config = LEVEL_CONFIG[difficulty];
   const [sequence, setSequence] = useState<number[]>([]);
   const [sequenceLength, setSequenceLength] = useState(config.initialLength);
@@ -100,12 +102,12 @@ export default function MemorySequence({ difficulty, onAnswer, timeRemaining }: 
       {/* Status */}
       <div className="text-center">
         <div className="text-sm text-muted">
-          {phase === 'showing' && 'Mémorise la séquence...'}
-          {phase === 'input' && `Reproduis (${userInput.length}/${sequence.length})`}
-          {phase === 'feedback' && feedback === 'correct' && 'Bravo !'}
-          {phase === 'feedback' && feedback === 'incorrect' && 'Raté !'}
+          {phase === 'showing' && t('memorySequence.memorize')}
+          {phase === 'input' && t('memorySequence.reproduce', { count: userInput.length, total: sequence.length })}
+          {phase === 'feedback' && feedback === 'correct' && t('memorySequence.bravo')}
+          {phase === 'feedback' && feedback === 'incorrect' && t('game.wrong')}
         </div>
-        <div className="text-xs text-muted mt-1">Longueur : {sequenceLength}</div>
+        <div className="text-xs text-muted mt-1">{t('memorySequence.length', { length: sequenceLength })}</div>
       </div>
 
       {/* Grid */}

@@ -1,7 +1,8 @@
 'use client';
 
 import type { CognitiveSkill } from '@/types';
-import { SKILL_LABELS, SKILL_COLORS } from '@/lib/constants';
+import { SKILL_LABEL_KEYS, SKILL_COLORS } from '@/lib/constants';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface SkillRadarProps {
   scores: Record<CognitiveSkill, number>; // 0-100
@@ -21,6 +22,7 @@ function polarToCartesian(angle: number, radius: number): { x: number; y: number
 }
 
 export function SkillRadar({ scores }: SkillRadarProps) {
+  const { t } = useTranslation();
   const angleStep = 360 / SKILLS.length;
 
   const rings = [0.25, 0.5, 0.75, 1].map((factor) => {
@@ -56,7 +58,7 @@ export function SkillRadar({ scores }: SkillRadarProps) {
         className="text-[8px] font-semibold uppercase tracking-wider"
         fill={SKILL_COLORS[skill]}
       >
-        {SKILL_LABELS[skill]}
+        {t(SKILL_LABEL_KEYS[skill])}
       </text>
     );
   });

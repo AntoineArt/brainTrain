@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { DifficultyLevel } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 import { AnswerOptions } from '@/components/game/AnswerOptions';
 import { generatePuzzle, type LogicPuzzle } from './logic';
 
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function LogicPlus({ difficulty, onAnswer, timeRemaining }: Props) {
+  const { t } = useTranslation();
   const [puzzle, setPuzzle] = useState<LogicPuzzle>(() => generatePuzzle(difficulty));
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const roundStartRef = useRef(Date.now());
@@ -47,7 +49,7 @@ export default function LogicPlus({ difficulty, onAnswer, timeRemaining }: Props
   return (
     <div className="flex flex-col items-center justify-between h-full py-6">
       <div className="flex-1 flex flex-col items-center justify-center gap-4 px-4">
-        <p className="text-sm text-muted">Quel nombre suit ?</p>
+        <p className="text-sm text-muted">{t('logicPlus.question')}</p>
 
         <div className="flex items-center gap-2 flex-wrap justify-center">
           {puzzle.sequence.map((num, i) => (

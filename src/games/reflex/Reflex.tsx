@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react';
 import type { DifficultyLevel } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 import { generateStimulus, type StimulusType } from './logic';
 import { LEVEL_CONFIG } from './config';
 
@@ -16,6 +17,7 @@ interface Props {
 type Phase = 'waiting' | 'stimulus' | 'feedback' | 'tooEarly';
 
 export default function Reflex({ difficulty, onAnswer, onComplete, timeRemaining, isPaused }: Props) {
+  const { t } = useTranslation();
   const config = LEVEL_CONFIG[difficulty];
   const [phase, setPhase] = useState<Phase>('waiting');
   const [stimulusType, setStimulusType] = useState<StimulusType>('go');
@@ -124,10 +126,10 @@ export default function Reflex({ difficulty, onAnswer, onComplete, timeRemaining
   return (
     <div className="flex flex-col items-center justify-center h-full px-4">
       <div className="text-sm text-muted mb-2">
-        Tour {Math.min(roundNumber + 1, config.rounds)}/{config.rounds}
+        {t('reflex.round', { current: Math.min(roundNumber + 1, config.rounds), total: config.rounds })}
         {config.hasNoGo && (
           <span className="block text-xs mt-1">
-            Touche le vert, ignore le rouge
+            {t('reflex.instruction')}
           </span>
         )}
       </div>
@@ -153,13 +155,13 @@ export default function Reflex({ difficulty, onAnswer, onComplete, timeRemaining
         }}
       >
         <span className="text-white text-xl font-bold">
-          {isPaused && 'Pause'}
-          {!isPaused && phase === 'waiting' && 'Attends...'}
-          {!isPaused && phase === 'stimulus' && (stimulusType === 'go' ? 'TOUCHE !' : 'NE TOUCHE PAS')}
-          {!isPaused && phase === 'tooEarly' && 'Trop tôt !'}
+          {isPaused && t('reflex.pause')}
+          {!isPaused && phase === 'waiting' && t('reflex.wait')}
+          {!isPaused && phase === 'stimulus' && (stimulusType === 'go' ? t('reflex.go') : t('reflex.noGo'))}
+          {!isPaused && phase === 'tooEarly' && t('reflex.tooEarly')}
           {!isPaused && phase === 'feedback' && feedbackCorrect && reactionTime !== null && `${reactionTime}ms`}
-          {!isPaused && phase === 'feedback' && feedbackCorrect && reactionTime === null && 'Bien !'}
-          {!isPaused && phase === 'feedback' && !feedbackCorrect && 'Raté !'}
+          {!isPaused && phase === 'feedback' && feedbackCorrect && reactionTime === null && t('reflex.good')}
+          {!isPaused && phase === 'feedback' && !feedbackCorrect && t('game.wrong')}
         </span>
       </button>
     </div>
