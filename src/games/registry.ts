@@ -111,6 +111,16 @@ export const GAME_REGISTRY: GameConfig[] = [
     maxLevel: 5,
     color: '#a855f7',
   },
+  {
+    id: 'defini-mot',
+    name: 'Défini-Mot',
+    description: 'Trouve le mot à partir de sa définition !',
+    icon: '💬',
+    skills: ['langage'],
+    defaultDuration: 45,
+    maxLevel: 5,
+    color: '#6366f1',
+  },
 ];
 
 export const GAME_MAP = new Map(GAME_REGISTRY.map((g) => [g.id, g]));

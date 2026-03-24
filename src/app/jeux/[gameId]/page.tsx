@@ -19,6 +19,7 @@ const GAME_COMPONENTS: Record<string, React.ComponentType<GameComponentProps>> =
   'paires': dynamic(() => import('@/games/paires/Paires')),
   'tri-express': dynamic(() => import('@/games/tri-express/TriExpress')),
   'culture-g': dynamic(() => import('@/games/culture-g/CultureG')),
+  'defini-mot': dynamic(() => import('@/games/defini-mot/DefiniMot')),
 };
 
 export default function GamePage({
