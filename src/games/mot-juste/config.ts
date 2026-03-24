@@ -1,7 +1,7 @@
 import type { DifficultyLevel } from '@/types';
 
 interface LevelConfig {
-  wordDifficulty: 'easy' | 'medium' | 'hard' | 'expert';
+  wordDifficulty: 'easy' | 'medium' | 'hard' | 'expert' | 'master';
 }
 
 export const LEVEL_CONFIG: Record<DifficultyLevel, LevelConfig> = {
@@ -9,4 +9,5 @@ export const LEVEL_CONFIG: Record<DifficultyLevel, LevelConfig> = {
   2: { wordDifficulty: 'medium' },
   3: { wordDifficulty: 'hard' },
   4: { wordDifficulty: 'expert' },
+  5: { wordDifficulty: 'master' },
 };

@@ -4,7 +4,7 @@ export interface WordQuestion {
   question: string;
   options: [string, string, string, string];
   correctIndex: number;
-  difficulty: 'easy' | 'medium' | 'hard' | 'expert';
+  difficulty: 'easy' | 'medium' | 'hard' | 'expert' | 'master';
 }
 
 export const WORD_QUESTIONS: WordQuestion[] = [
@@ -67,4 +67,21 @@ export const WORD_QUESTIONS: WordQuestion[] = [
   { word: 'aporie', type: 'definition', question: 'Que signifie "aporie" ?', options: ['Solution', 'Impasse logique', 'Clarté', 'Réponse'], correctIndex: 1, difficulty: 'expert' },
   { word: 'sérendipité', type: 'definition', question: 'Que signifie "sérendipité" ?', options: ['Malchance', 'Découverte heureuse par hasard', 'Prévision', 'Planification'], correctIndex: 1, difficulty: 'expert' },
   { word: 'thuriféraire', type: 'definition', question: 'Que signifie "thuriféraire" ?', options: ['Critique', 'Flatteur excessif', 'Opposant', 'Juge'], correctIndex: 1, difficulty: 'expert' },
+
+  // === MASTER ===
+  { word: 'apophatique', type: 'definition', question: 'Que signifie "apophatique" ?', options: ['Qui affirme', 'Qui définit par la négation', 'Qui prouve', 'Qui catégorise'], correctIndex: 1, difficulty: 'master' },
+  { word: 'épistémè', type: 'definition', question: 'Que signifie "épistémè" (Foucault) ?', options: ['Savoir individuel', 'Structure de pensée d\'une époque', 'Méthode scientifique', 'Théorie philosophique'], correctIndex: 1, difficulty: 'master' },
+  { word: 'apodictique', type: 'definition', question: 'Que signifie "apodictique" ?', options: ['Incertain', 'Nécessairement vrai', 'Probablement faux', 'Discutable'], correctIndex: 1, difficulty: 'master' },
+  { word: 'hypostasier', type: 'definition', question: 'Que signifie "hypostasier" ?', options: ['Simplifier', 'Transformer une abstraction en réalité', 'Détruire', 'Relativiser'], correctIndex: 1, difficulty: 'master' },
+  { word: 'catachrèse', type: 'definition', question: 'Que signifie "catachrèse" ?', options: ['Répétition', 'Métaphore figée dans l\'usage', 'Exagération', 'Contradiction'], correctIndex: 1, difficulty: 'master' },
+  { word: 'prétérition', type: 'definition', question: 'Que signifie "prétérition" ?', options: ['Dire en prétendant ne pas dire', 'Oublier volontairement', 'Exagérer un propos', 'Nier l\'évidence'], correctIndex: 0, difficulty: 'master' },
+  { word: 'syllepse', type: 'definition', question: 'Que signifie "syllepse" ?', options: ['Double sens simultané', 'Accord incorrect', 'Phrase inversée', 'Mot inventé'], correctIndex: 0, difficulty: 'master' },
+  { word: 'étiologie', type: 'definition', question: 'Que signifie "étiologie" ?', options: ['Étude des effets', 'Étude des causes', 'Étude des mots', 'Étude des formes'], correctIndex: 1, difficulty: 'master' },
+  { word: 'propédeutique', type: 'definition', question: 'Que signifie "propédeutique" ?', options: ['Enseignement avancé', 'Enseignement préparatoire', 'Recherche fondamentale', 'Examen final'], correctIndex: 1, difficulty: 'master' },
+  { word: 'heuristique', type: 'synonym', question: 'Synonyme de "heuristique"', options: ['Démonstratif', 'Exploratoire', 'Définitif', 'Restrictif'], correctIndex: 1, difficulty: 'master' },
+  { word: 'idiosyncrasie', type: 'definition', question: 'Que signifie "idiosyncrasie" ?', options: ['Caractère commun', 'Tempérament propre à un individu', 'Maladie contagieuse', 'Habitude collective'], correctIndex: 1, difficulty: 'master' },
+  { word: 'concupiscence', type: 'definition', question: 'Que signifie "concupiscence" ?', options: ['Sagesse', 'Désir ardent des biens terrestres', 'Indifférence', 'Piété'], correctIndex: 1, difficulty: 'master' },
+  { word: 'stochastique', type: 'definition', question: 'Que signifie "stochastique" ?', options: ['Déterministe', 'Lié au hasard', 'Systématique', 'Prévisible'], correctIndex: 1, difficulty: 'master' },
+  { word: 'anamnèse', type: 'definition', question: 'Que signifie "anamnèse" ?', options: ['Oubli total', 'Rappel à la mémoire', 'Perte de conscience', 'Confusion mentale'], correctIndex: 1, difficulty: 'master' },
+  { word: 'paralogisme', type: 'definition', question: 'Que signifie "paralogisme" ?', options: ['Raisonnement valide', 'Raisonnement faux involontaire', 'Argument persuasif', 'Démonstration rigoureuse'], correctIndex: 1, difficulty: 'master' },
 ];

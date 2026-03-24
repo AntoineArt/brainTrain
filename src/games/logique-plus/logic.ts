@@ -31,8 +31,11 @@ export function generatePuzzle(difficulty: DifficultyLevel): LogicPuzzle {
     // Alternating or multiplicative
     if (Math.random() > 0.5) {
       // Multiply pattern: x2, x3, etc.
-      const multiplier = randomInt(2, 3);
-      const start = randomInt(1, 5);
+      // Limit multiplier for long sequences to keep answers under ~1000
+      const maxMult = config.sequenceLength >= 7 ? 2 : 3;
+      const multiplier = randomInt(2, maxMult);
+      const maxStart = Math.max(1, Math.floor(1000 / Math.pow(multiplier, config.sequenceLength)));
+      const start = randomInt(1, Math.max(1, Math.min(5, maxStart)));
       sequence = [];
       let current = start;
       for (let i = 0; i < config.sequenceLength; i++) {

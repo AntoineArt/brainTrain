@@ -8,7 +8,7 @@ export const GAME_REGISTRY: GameConfig[] = [
     icon: '🔢',
     skills: ['calcul', 'vitesse'],
     defaultDuration: 45,
-    maxLevel: 4,
+    maxLevel: 5,
     color: '#3b82f6',
   },
   {
@@ -18,7 +18,7 @@ export const GAME_REGISTRY: GameConfig[] = [
     icon: '🧠',
     skills: ['memoire'],
     defaultDuration: 45,
-    maxLevel: 4,
+    maxLevel: 5,
     color: '#8b5cf6',
   },
   {
@@ -28,7 +28,7 @@ export const GAME_REGISTRY: GameConfig[] = [
     icon: '🔍',
     skills: ['attention', 'vitesse'],
     defaultDuration: 45,
-    maxLevel: 4,
+    maxLevel: 5,
     color: '#06b6d4',
   },
   {
@@ -38,7 +38,7 @@ export const GAME_REGISTRY: GameConfig[] = [
     icon: '⚡',
     skills: ['vitesse', 'attention'],
     defaultDuration: 45,
-    maxLevel: 4,
+    maxLevel: 5,
     color: '#f97316',
   },
   {
@@ -48,7 +48,7 @@ export const GAME_REGISTRY: GameConfig[] = [
     icon: '🧩',
     skills: ['logique'],
     defaultDuration: 45,
-    maxLevel: 4,
+    maxLevel: 5,
     color: '#10b981',
   },
   {
@@ -58,7 +58,7 @@ export const GAME_REGISTRY: GameConfig[] = [
     icon: '📝',
     skills: ['langage'],
     defaultDuration: 45,
-    maxLevel: 4,
+    maxLevel: 5,
     color: '#ec4899',
   },
   {
@@ -68,7 +68,7 @@ export const GAME_REGISTRY: GameConfig[] = [
     icon: '🔄',
     skills: ['logique', 'attention'],
     defaultDuration: 45,
-    maxLevel: 4,
+    maxLevel: 5,
     color: '#10b981',
   },
   {
@@ -78,7 +78,7 @@ export const GAME_REGISTRY: GameConfig[] = [
     icon: '👁️',
     skills: ['attention'],
     defaultDuration: 45,
-    maxLevel: 4,
+    maxLevel: 5,
     color: '#06b6d4',
   },
   {
@@ -88,7 +88,7 @@ export const GAME_REGISTRY: GameConfig[] = [
     icon: '🃏',
     skills: ['memoire'],
     defaultDuration: 45,
-    maxLevel: 4,
+    maxLevel: 5,
     color: '#8b5cf6',
   },
   {
@@ -98,7 +98,7 @@ export const GAME_REGISTRY: GameConfig[] = [
     icon: '📊',
     skills: ['logique', 'vitesse'],
     defaultDuration: 45,
-    maxLevel: 4,
+    maxLevel: 5,
     color: '#f97316',
   },
   {
@@ -108,7 +108,7 @@ export const GAME_REGISTRY: GameConfig[] = [
     icon: '🎓',
     skills: ['culture'],
     defaultDuration: 45,
-    maxLevel: 4,
+    maxLevel: 5,
     color: '#a855f7',
   },
 ];

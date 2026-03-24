@@ -7,7 +7,7 @@ export type CognitiveSkill =
   | 'attention'
   | 'culture';
 
-export type DifficultyLevel = 1 | 2 | 3 | 4;
+export type DifficultyLevel = 1 | 2 | 3 | 4 | 5;
 
 export type GameStatus = 'idle' | 'instructions' | 'playing' | 'paused' | 'finished';
 

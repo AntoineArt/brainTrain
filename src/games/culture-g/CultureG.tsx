@@ -3,8 +3,8 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { DifficultyLevel } from '@/types';
 import { AnswerOptions } from '@/components/game/AnswerOptions';
-import { getQuestion } from './logic';
-import type { QuizQuestion } from './questions';
+import { getQuestion, type ShuffledQuizQuestion } from './logic';
+import { CATEGORY_LABELS } from './config';
 
 interface Props {
   difficulty: DifficultyLevel;
@@ -16,7 +16,7 @@ interface Props {
 
 export default function CultureG({ difficulty, onAnswer, timeRemaining }: Props) {
   const usedIdsRef = useRef(new Set<string>());
-  const [question, setQuestion] = useState<QuizQuestion | null>(() =>
+  const [question, setQuestion] = useState<ShuffledQuizQuestion | null>(() =>
     getQuestion(difficulty, usedIdsRef.current),
   );
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -58,7 +58,7 @@ export default function CultureG({ difficulty, onAnswer, timeRemaining }: Props)
     <div className="flex flex-col items-center justify-between h-full py-6">
       <div className="flex-1 flex flex-col items-center justify-center gap-4 px-4">
         <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-skill-culture/10 text-skill-culture">
-          {question.category.charAt(0).toUpperCase() + question.category.slice(1)}
+          {CATEGORY_LABELS[question.category]}
         </span>
 
         <h3 className="text-lg font-bold text-center leading-snug">

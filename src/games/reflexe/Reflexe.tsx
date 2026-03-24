@@ -15,7 +15,7 @@ interface Props {
 
 type Phase = 'waiting' | 'stimulus' | 'feedback' | 'tooEarly';
 
-export default function Reflexe({ difficulty, onAnswer, onComplete, timeRemaining }: Props) {
+export default function Reflexe({ difficulty, onAnswer, onComplete, timeRemaining, isPaused }: Props) {
   const config = LEVEL_CONFIG[difficulty];
   const [phase, setPhase] = useState<Phase>('waiting');
   const [stimulusType, setStimulusType] = useState<StimulusType>('go');
@@ -24,8 +24,21 @@ export default function Reflexe({ difficulty, onAnswer, onComplete, timeRemainin
   const [roundNumber, setRoundNumber] = useState(0);
   const stimulusTimeRef = useRef(0);
   const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
+  const pausedRef = useRef(false);
+
+  // Keep ref in sync so callbacks can check it
+  pausedRef.current = isPaused;
+
+  // Clear all timers when paused
+  useEffect(() => {
+    if (isPaused && timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  }, [isPaused]);
 
   const startNewRound = useCallback(() => {
+    if (pausedRef.current) return;
     if (roundNumber >= config.rounds) {
       onComplete();
       return;
@@ -38,12 +51,14 @@ export default function Reflexe({ difficulty, onAnswer, onComplete, timeRemainin
     setFeedbackCorrect(null);
 
     timerRef.current = setTimeout(() => {
+      if (pausedRef.current) return;
       setPhase('stimulus');
       stimulusTimeRef.current = performance.now();
 
       // Auto-advance if no-go: player should NOT tap. If they don't tap in 2s, that's correct.
       if (stimulus.type === 'nogo') {
         timerRef.current = setTimeout(() => {
+          if (pausedRef.current) return;
           setFeedbackCorrect(true);
           setPhase('feedback');
           onAnswer(true, 0);
@@ -54,20 +69,25 @@ export default function Reflexe({ difficulty, onAnswer, onComplete, timeRemainin
   }, [roundNumber, config, onAnswer, onComplete]);
 
   useEffect(() => {
-    startNewRound();
+    if (!isPaused) {
+      startNewRound();
+    }
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [roundNumber]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [roundNumber, isPaused]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleTap = useCallback(() => {
+    if (isPaused) return;
     if (timerRef.current) clearTimeout(timerRef.current);
 
     if (phase === 'waiting') {
       // Tapped too early
       setPhase('tooEarly');
       onAnswer(false, 0);
-      setTimeout(() => setRoundNumber((r) => r + 1), 1000);
+      setTimeout(() => {
+        if (!pausedRef.current) setRoundNumber((r) => r + 1);
+      }, 1000);
       return;
     }
 
@@ -86,9 +106,11 @@ export default function Reflexe({ difficulty, onAnswer, onComplete, timeRemainin
         onAnswer(false, rt);
       }
 
-      setTimeout(() => setRoundNumber((r) => r + 1), 1000);
+      setTimeout(() => {
+        if (!pausedRef.current) setRoundNumber((r) => r + 1);
+      }, 1000);
     }
-  }, [phase, stimulusType, onAnswer]);
+  }, [phase, stimulusType, onAnswer, isPaused]);
 
   // Auto-advance from feedback
   useEffect(() => {
@@ -112,7 +134,7 @@ export default function Reflexe({ difficulty, onAnswer, onComplete, timeRemainin
 
       <button
         onClick={handleTap}
-        disabled={phase === 'feedback'}
+        disabled={phase === 'feedback' || isPaused}
         className="w-64 h-64 rounded-full flex items-center justify-center transition-all duration-100 touch-manipulation cursor-pointer active:scale-95"
         style={{
           backgroundColor:
@@ -127,16 +149,17 @@ export default function Reflexe({ difficulty, onAnswer, onComplete, timeRemainin
               : feedbackCorrect
               ? 'var(--success)'
               : 'var(--error)',
-          opacity: phase === 'feedback' ? 0.6 : 1,
+          opacity: phase === 'feedback' || isPaused ? 0.6 : 1,
         }}
       >
         <span className="text-white text-xl font-bold">
-          {phase === 'waiting' && 'Attends...'}
-          {phase === 'stimulus' && (stimulusType === 'go' ? 'TOUCHE !' : 'NE TOUCHE PAS')}
-          {phase === 'tooEarly' && 'Trop tôt !'}
-          {phase === 'feedback' && feedbackCorrect && reactionTime !== null && `${reactionTime}ms`}
-          {phase === 'feedback' && feedbackCorrect && reactionTime === null && 'Bien !'}
-          {phase === 'feedback' && !feedbackCorrect && 'Raté !'}
+          {isPaused && 'Pause'}
+          {!isPaused && phase === 'waiting' && 'Attends...'}
+          {!isPaused && phase === 'stimulus' && (stimulusType === 'go' ? 'TOUCHE !' : 'NE TOUCHE PAS')}
+          {!isPaused && phase === 'tooEarly' && 'Trop tôt !'}
+          {!isPaused && phase === 'feedback' && feedbackCorrect && reactionTime !== null && `${reactionTime}ms`}
+          {!isPaused && phase === 'feedback' && feedbackCorrect && reactionTime === null && 'Bien !'}
+          {!isPaused && phase === 'feedback' && !feedbackCorrect && 'Raté !'}
         </span>
       </button>
     </div>

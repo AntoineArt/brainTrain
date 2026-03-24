@@ -31,14 +31,14 @@ export function generateProblem(difficulty: DifficultyLevel): MathProblem {
       answer = a - b;
       break;
     case '×':
-      a = randomInt(2, Math.min(config.maxA, 30));
-      b = randomInt(2, Math.min(config.maxB, 15));
+      a = randomInt(2, config.maxMultA);
+      b = randomInt(2, config.maxMultB);
       answer = a * b;
       break;
     case '÷':
       // Generate division with integer result
-      b = randomInt(2, Math.min(config.maxB, 12));
-      answer = randomInt(2, Math.min(config.maxA / b, 20));
+      b = randomInt(2, config.maxDivB);
+      answer = randomInt(2, config.maxDivAnswer);
       a = b * answer;
       break;
     default:

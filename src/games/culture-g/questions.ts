@@ -6,7 +6,7 @@ export interface QuizQuestion {
   question: string;
   choices: [string, string, string, string];
   correctIndex: number;
-  difficulty: 1 | 2 | 3 | 4;
+  difficulty: 1 | 2 | 3 | 4 | 5;
   explanation: string;
 }
 
@@ -515,4 +515,57 @@ export const QUESTIONS: QuizQuestion[] = [
   { id: 'l32', category: 'langues', question: 'Quelle langue artificielle a été créée en 1887 par Zamenhof ?', choices: ['Volapük', 'Espéranto', 'Interlingua', 'Ido'], correctIndex: 1, difficulty: 4, explanation: 'L\'espéranto a été créé par Ludwik Zamenhof en 1887.' },
   { id: 'l33', category: 'langues', question: 'Que signifie "faire la grasse matinée" ?', choices: ['Faire un grand repas', 'Dormir tard le matin', 'Faire du sport le matin', 'Se lever tôt'], correctIndex: 1, difficulty: 1, explanation: '"Faire la grasse matinée" signifie rester au lit tard le matin.' },
   { id: 'l34', category: 'langues', question: 'D\'où vient le mot "avatar" ?', choices: ['Du grec', 'Du latin', 'Du sanskrit', 'Du japonais'], correctIndex: 2, difficulty: 3, explanation: '"Avatar" vient du sanskrit "avatāra" qui signifie "descente" d\'une divinité.' },
+
+  // ===== NIVEAU 5 — MAÎTRE =====
+  // HISTOIRE
+  { id: 'h5_1', category: 'histoire', question: 'Quel traité de 1648 a mis fin à la guerre de Trente Ans ?', choices: ['Traité d\'Utrecht', 'Paix de Westphalie', 'Traité de Tordesillas', 'Paix d\'Augsbourg'], correctIndex: 1, difficulty: 5, explanation: 'La paix de Westphalie (1648) a redessiné la carte politique de l\'Europe et posé les bases du droit international moderne.' },
+  { id: 'h5_2', category: 'histoire', question: 'Quel empereur byzantin a codifié le droit romain dans le Corpus Juris Civilis ?', choices: ['Constantin', 'Théodose', 'Justinien', 'Héraclius'], correctIndex: 2, difficulty: 5, explanation: 'Justinien Ier a ordonné la compilation du Corpus Juris Civilis entre 529 et 534, base du droit européen.' },
+  { id: 'h5_3', category: 'histoire', question: 'Quelle bataille de 1571 a brisé la suprématie navale ottomane en Méditerranée ?', choices: ['Bataille de Trafalgar', 'Bataille de Lépante', 'Bataille de Salamine', 'Bataille d\'Actium'], correctIndex: 1, difficulty: 5, explanation: 'La bataille de Lépante (7 octobre 1571) opposa la Sainte Ligue à l\'Empire ottoman.' },
+
+  // GÉOGRAPHIE
+  { id: 'g5_1', category: 'geographie', question: 'Quel détroit sépare l\'île de Bornéo de Sulawesi et marque la ligne de Wallace ?', choices: ['Détroit de Macassar', 'Détroit de Malacca', 'Détroit de la Sonde', 'Détroit de Torres'], correctIndex: 0, difficulty: 5, explanation: 'Le détroit de Macassar coïncide avec la ligne de Wallace, frontière biogéographique entre faune asiatique et australasienne.' },
+  { id: 'g5_2', category: 'geographie', question: 'Quel pays enclavé possède la plus haute capitale du monde ?', choices: ['Népal', 'Éthiopie', 'Bolivie', 'Bhoutan'], correctIndex: 2, difficulty: 5, explanation: 'La Paz en Bolivie, à environ 3 640 m d\'altitude, est la plus haute capitale administrative du monde.' },
+  { id: 'g5_3', category: 'geographie', question: 'Quel fleuve traverse le plus de pays au monde ?', choices: ['Le Nil', 'Le Danube', 'Le Mékong', 'Le Rhin'], correctIndex: 1, difficulty: 5, explanation: 'Le Danube traverse ou borde 10 pays, ce qui en fait le fleuve le plus international au monde.' },
+
+  // SCIENCES
+  { id: 's5_1', category: 'sciences', question: 'Quel physicien a proposé le principe d\'exclusion en mécanique quantique ?', choices: ['Heisenberg', 'Dirac', 'Pauli', 'Schrödinger'], correctIndex: 2, difficulty: 5, explanation: 'Le principe d\'exclusion de Pauli (1925) stipule que deux fermions ne peuvent occuper le même état quantique.' },
+  { id: 's5_2', category: 'sciences', question: 'Quelle est la constante de structure fine (arrondie) ?', choices: ['1/137', '1/100', '1/256', '1/42'], correctIndex: 0, difficulty: 5, explanation: 'La constante de structure fine α ≈ 1/137 caractérise l\'intensité de l\'interaction électromagnétique.' },
+  { id: 's5_3', category: 'sciences', question: 'Quel processus cellulaire permet la dégradation contrôlée des protéines par le protéasome ?', choices: ['Apoptose', 'Autophagie', 'Ubiquitination', 'Glycosylation'], correctIndex: 2, difficulty: 5, explanation: 'L\'ubiquitination marque les protéines avec de l\'ubiquitine pour qu\'elles soient dégradées par le protéasome.' },
+
+  // ART & LITTÉRATURE
+  { id: 'a5_1', category: 'art', question: 'Quel compositeur a écrit "Le Sacre du printemps", provoquant un scandale en 1913 ?', choices: ['Debussy', 'Ravel', 'Stravinsky', 'Prokofiev'], correctIndex: 2, difficulty: 5, explanation: 'La première du Sacre du printemps de Stravinsky au Théâtre des Champs-Élysées en 1913 provoqua une quasi-émeute.' },
+  { id: 'a5_2', category: 'art', question: 'Quel mouvement artistique Kazimir Malevitch a-t-il fondé avec son "Carré noir" ?', choices: ['Constructivisme', 'Suprématisme', 'De Stijl', 'Futurisme'], correctIndex: 1, difficulty: 5, explanation: 'Malevitch a fondé le suprématisme en 1915, un art abstrait géométrique radical.' },
+  { id: 'a5_3', category: 'art', question: 'Quel auteur japonais, prix Nobel refusé, s\'est suicidé par seppuku en 1970 ?', choices: ['Kawabata', 'Mishima', 'Tanizaki', 'Ōe'], correctIndex: 1, difficulty: 5, explanation: 'Yukio Mishima s\'est donné la mort le 25 novembre 1970 après une tentative de coup d\'État manquée.' },
+
+  // SPORT
+  { id: 'sp5_1', category: 'sport', question: 'Quel athlète détient le record de médailles d\'or aux JO d\'été (23 or) ?', choices: ['Usain Bolt', 'Carl Lewis', 'Michael Phelps', 'Paavo Nurmi'], correctIndex: 2, difficulty: 5, explanation: 'Michael Phelps détient 23 médailles d\'or olympiques en natation, un record absolu.' },
+  { id: 'sp5_2', category: 'sport', question: 'Quel est le seul Grand Chelem de tennis joué sur terre battue ?', choices: ['Open d\'Australie', 'Wimbledon', 'US Open', 'Roland-Garros'], correctIndex: 3, difficulty: 5, explanation: 'Roland-Garros est le seul Grand Chelem disputé sur terre battue depuis 1928.' },
+
+  // CINÉMA
+  { id: 'c5_1', category: 'cinema', question: 'Quel réalisateur a théorisé "l\'effet Koulechov" fondamental au montage ?', choices: ['Eisenstein', 'Koulechov', 'Vertov', 'Poudovkine'], correctIndex: 1, difficulty: 5, explanation: 'Lev Koulechov a démontré que le montage crée le sens : un même visage paraît exprimer des émotions différentes selon le plan suivant.' },
+  { id: 'c5_2', category: 'cinema', question: 'Quel film de 1941, souvent élu meilleur film de l\'histoire, est l\'œuvre d\'Orson Welles ?', choices: ['Casablanca', 'Citizen Kane', 'Le Troisième Homme', 'Vertigo'], correctIndex: 1, difficulty: 5, explanation: 'Citizen Kane, réalisé par Orson Welles à 25 ans, a révolutionné la narration et la technique cinématographiques.' },
+
+  // MUSIQUE
+  { id: 'mu5_1', category: 'musique', question: 'Quel compositeur baroque a écrit "Les Quatre Saisons" ?', choices: ['Bach', 'Haendel', 'Vivaldi', 'Telemann'], correctIndex: 2, difficulty: 5, explanation: 'Antonio Vivaldi a composé Les Quatre Saisons (1725), quatre concertos pour violon parmi les plus célèbres.' },
+  { id: 'mu5_2', category: 'musique', question: 'Quel mode musical médiéval est l\'ancêtre de notre gamme mineure naturelle ?', choices: ['Mode dorien', 'Mode phrygien', 'Mode éolien', 'Mode mixolydien'], correctIndex: 2, difficulty: 5, explanation: 'Le mode éolien correspond à la gamme mineure naturelle utilisée dans la musique occidentale moderne.' },
+
+  // NATURE
+  { id: 'n5_1', category: 'nature', question: 'Quel phénomène quantique permet aux plantes de convertir la lumière avec ~95% d\'efficacité ?', choices: ['Effet tunnel', 'Cohérence quantique', 'Superposition', 'Intrication'], correctIndex: 1, difficulty: 5, explanation: 'La cohérence quantique dans les complexes antennaires permet un transfert d\'énergie quasi parfait lors de la photosynthèse.' },
+  { id: 'n5_2', category: 'nature', question: 'Quel est le seul mammifère véritablement capable de vol actif ?', choices: ['L\'écureuil volant', 'La chauve-souris', 'Le colugo', 'Le sucre planant'], correctIndex: 1, difficulty: 5, explanation: 'Les chauves-souris (Chiroptères) sont les seuls mammifères capables de vol battu, contrairement aux planeurs.' },
+
+  // GASTRONOMIE
+  { id: 'ga5_1', category: 'gastronomie', question: 'Quelle réaction chimique donne sa croûte dorée au pain ?', choices: ['Caramélisation', 'Réaction de Maillard', 'Oxydation', 'Fermentation'], correctIndex: 1, difficulty: 5, explanation: 'La réaction de Maillard entre acides aminés et sucres réducteurs produit les arômes et la couleur brune de la croûte.' },
+  { id: 'ga5_2', category: 'gastronomie', question: 'Quel est le seul fromage AOP fabriqué exclusivement avec du lait de brebis en France métropolitaine continentale ?', choices: ['Roquefort', 'Ossau-Iraty', 'Brocciu', 'Banon'], correctIndex: 0, difficulty: 5, explanation: 'Le Roquefort est le premier fromage à avoir obtenu une AOC (1925), fabriqué uniquement avec du lait cru de brebis Lacaune.' },
+
+  // TECHNOLOGIE
+  { id: 't5_1', category: 'technologie', question: 'Quel algorithme de consensus utilise Bitcoin pour valider les transactions ?', choices: ['Proof of Stake', 'Proof of Work', 'Proof of Authority', 'Byzantine Fault Tolerance'], correctIndex: 1, difficulty: 5, explanation: 'Bitcoin utilise le Proof of Work (preuve de travail), un mécanisme de consensus énergivore basé sur le hashage SHA-256.' },
+  { id: 't5_2', category: 'technologie', question: 'Quelle architecture de processeur, conçue en 1980, domine aujourd\'hui les smartphones ?', choices: ['x86', 'ARM', 'MIPS', 'RISC-V'], correctIndex: 1, difficulty: 5, explanation: 'L\'architecture ARM (Advanced RISC Machines), conçue en 1983 par Acorn, équipe plus de 95% des smartphones.' },
+
+  // MYTHOLOGIE
+  { id: 'my5_1', category: 'mythologie', question: 'Dans la mythologie nordique, quel événement apocalyptique détruit le monde ?', choices: ['Götterdämmerung', 'Ragnarök', 'Fimbulvetr', 'Niflheim'], correctIndex: 1, difficulty: 5, explanation: 'Le Ragnarök est la fin du monde dans la mythologie nordique : les dieux meurent au combat et le monde est englouti.' },
+  { id: 'my5_2', category: 'mythologie', question: 'Quel titan grec a été condamné à porter la voûte céleste sur ses épaules ?', choices: ['Prométhée', 'Cronos', 'Atlas', 'Hypérion'], correctIndex: 2, difficulty: 5, explanation: 'Atlas a été condamné par Zeus à soutenir la voûte céleste après la défaite des Titans.' },
+
+  // LANGUES
+  { id: 'l5_1', category: 'langues', question: 'Quelle famille linguistique regroupe le finnois, le hongrois et l\'estonien ?', choices: ['Indo-européenne', 'Ouralienne', 'Altaïque', 'Caucasienne'], correctIndex: 1, difficulty: 5, explanation: 'Le finnois, le hongrois et l\'estonien appartiennent à la famille des langues ouraliennes, distincte de l\'indo-européen.' },
+  { id: 'l5_2', category: 'langues', question: 'Quel linguiste a formulé la théorie de la grammaire générative ?', choices: ['Saussure', 'Chomsky', 'Jakobson', 'Sapir'], correctIndex: 1, difficulty: 5, explanation: 'Noam Chomsky a révolutionné la linguistique avec sa théorie de la grammaire générative-transformationnelle en 1957.' },
 ];

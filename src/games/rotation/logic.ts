@@ -103,17 +103,22 @@ export function generatePuzzle(difficulty: DifficultyLevel): RotationPuzzle {
   }
 
   // Fill remaining with random rotations of reflected shape
-  while (options.length < 4) {
+  let attempts = 0;
+  while (options.length < 4 && attempts < 20) {
+    attempts++;
     const reflected = reflectGrid(shape);
     let rotated = reflected;
     for (let i = 0; i < randomInt(0, 3); i++) rotated = rotateGrid90(rotated);
     tryAdd(rotated);
-    // Fallback: just duplicate to prevent infinite loop
-    if (options.length < 4) {
-      let extra = shape;
-      for (let i = 0; i < randomInt(0, 3); i++) extra = rotateGrid90(extra);
-      options.push(extra);
-    }
+  }
+
+  // Hard fallback: generate a new random shape as a clearly-wrong option
+  while (options.length < 4) {
+    const wrongShape = generateShape(config.complexity);
+    let rotated = wrongShape;
+    for (let i = 0; i < randomInt(0, 3); i++) rotated = rotateGrid90(rotated);
+    options.push(rotated);
+    usedGrids.push(rotated);
   }
 
   const shuffled = shuffle(options.slice(0, 4));

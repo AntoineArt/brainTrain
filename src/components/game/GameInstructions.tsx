@@ -9,6 +9,7 @@ const DIFFICULTY_LABELS: Record<DifficultyLevel, string> = {
   2: 'Moyen',
   3: 'Difficile',
   4: 'Expert',
+  5: 'Maître',
 };
 
 interface GameInstructionsProps {
@@ -23,7 +24,7 @@ interface GameInstructionsProps {
 
 export function GameInstructions({ name, description, icon, color, maxLevel, initialDifficulty, onStart }: GameInstructionsProps) {
   const [difficulty, setDifficulty] = useState<DifficultyLevel>(initialDifficulty);
-  const levels = ([1, 2, 3, 4] as DifficultyLevel[]).filter((l) => l <= maxLevel);
+  const levels = ([1, 2, 3, 4, 5] as DifficultyLevel[]).filter((l) => l <= maxLevel);
 
   return (
     <div className="flex flex-col items-center justify-center h-[calc(100dvh-60px)] px-6 text-center gap-5">

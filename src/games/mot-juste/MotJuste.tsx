@@ -3,8 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { DifficultyLevel } from '@/types';
 import { AnswerOptions } from '@/components/game/AnswerOptions';
-import { getQuestion } from './logic';
-import type { WordQuestion } from './words';
+import { getQuestion, type ShuffledQuestion } from './logic';
 
 interface Props {
   difficulty: DifficultyLevel;
@@ -16,7 +15,7 @@ interface Props {
 
 export default function MotJuste({ difficulty, onAnswer, timeRemaining }: Props) {
   const usedWordsRef = useRef(new Set<string>());
-  const [question, setQuestion] = useState<WordQuestion | null>(() =>
+  const [question, setQuestion] = useState<ShuffledQuestion | null>(() =>
     getQuestion(difficulty, usedWordsRef.current),
   );
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);

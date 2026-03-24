@@ -11,6 +11,7 @@ export const LEVEL_CONFIG: Record<DifficultyLevel, LevelConfig> = {
   2: { gridSize: 5, symbolCount: 4, targetCount: { min: 3, max: 7 } },
   3: { gridSize: 5, symbolCount: 5, targetCount: { min: 3, max: 8 } },
   4: { gridSize: 6, symbolCount: 6, targetCount: { min: 4, max: 10 } },
+  5: { gridSize: 7, symbolCount: 7, targetCount: { min: 5, max: 12 } },
 };
 
 export const SYMBOLS = ['★', '●', '■', '▲', '◆', '♥', '♠', '♦', '♣', '✦'];

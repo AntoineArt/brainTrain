@@ -15,6 +15,8 @@ export interface IntrusPuzzle {
   gridSize: number;
 }
 
+type DifferenceType = 'color' | 'shape' | 'size';
+
 export function generatePuzzle(difficulty: DifficultyLevel): IntrusPuzzle {
   const config = LEVEL_CONFIG[difficulty];
   const totalCells = config.gridSize * config.gridSize;
@@ -24,21 +26,29 @@ export function generatePuzzle(difficulty: DifficultyLevel): IntrusPuzzle {
   const baseColor = randomPick(COLORS);
   const baseSize = 32;
 
-  // Pick different attributes for the intrus
+  // Build list of allowed difference types from config
+  const possibleDiffs: DifferenceType[] = [];
+  if (config.colorDifference) possibleDiffs.push('color');
+  if (config.shapeDifference) possibleDiffs.push('shape');
+  if (config.sizeDifference) possibleDiffs.push('size');
+
+  // Pick exactly one difference type at random
+  const chosenDiff = randomPick(possibleDiffs);
+
   let intrusShape = baseShape;
   let intrusColor = baseColor;
   let intrusSize = baseSize;
 
-  if (config.shapeDifference && Math.random() > 0.5) {
-    intrusShape = randomPick(SHAPES.filter((s) => s !== baseShape));
-  } else if (config.colorDifference) {
-    intrusColor = randomPick(COLORS.filter((c) => c !== baseColor));
-  }
-
-  if (config.sizeDifference && Math.random() > 0.6) {
-    intrusSize = Math.random() > 0.5 ? 24 : 40;
-    intrusShape = baseShape;
-    intrusColor = baseColor;
+  switch (chosenDiff) {
+    case 'color':
+      intrusColor = randomPick(COLORS.filter((c) => c !== baseColor));
+      break;
+    case 'shape':
+      intrusShape = randomPick(SHAPES.filter((s) => s !== baseShape));
+      break;
+    case 'size':
+      intrusSize = Math.random() > 0.5 ? 22 : 42;
+      break;
   }
 
   const items: IntrusItem[] = Array.from({ length: totalCells }, (_, i) => {

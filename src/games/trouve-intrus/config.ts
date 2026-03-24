@@ -12,6 +12,7 @@ export const LEVEL_CONFIG: Record<DifficultyLevel, LevelConfig> = {
   2: { gridSize: 4, colorDifference: true, shapeDifference: true, sizeDifference: false },
   3: { gridSize: 4, colorDifference: true, shapeDifference: true, sizeDifference: true },
   4: { gridSize: 5, colorDifference: true, shapeDifference: true, sizeDifference: true },
+  5: { gridSize: 6, colorDifference: true, shapeDifference: true, sizeDifference: true },
 };
 
 export const SHAPES = ['●', '■', '▲', '◆', '★', '⬟'];
