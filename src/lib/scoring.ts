@@ -1,6 +1,6 @@
 const BASE_POINTS = 100;
 const MAX_SPEED_MULTIPLIER = 2.0;
-const SPEED_WINDOW_MS = 5000; // réponse en moins de 5s = bonus max
+const SPEED_WINDOW_MS = 5000; // response under 5s = max bonus
 
 export function calculatePoints(
   correct: boolean,

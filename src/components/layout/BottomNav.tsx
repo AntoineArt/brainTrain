@@ -5,14 +5,14 @@ import { usePathname } from 'next/navigation';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Accueil', icon: '🏠' },
-  { href: '/jeux', label: 'Jeux', icon: '🎮' },
-  { href: '/resultats', label: 'Stats', icon: '📊' },
+  { href: '/games', label: 'Jeux', icon: '🎮' },
+  { href: '/results', label: 'Stats', icon: '📊' },
 ];
 
 export function BottomNav() {
   const pathname = usePathname();
 
-  if (pathname.startsWith('/jeux/') && pathname !== '/jeux') {
+  if (pathname.startsWith('/games/') && pathname !== '/games') {
     return null;
   }
 

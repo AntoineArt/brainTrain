@@ -7,7 +7,7 @@ interface SkillRadarProps {
   scores: Record<CognitiveSkill, number>; // 0-100
 }
 
-const SKILLS: CognitiveSkill[] = ['calcul', 'memoire', 'logique', 'vitesse', 'langage', 'attention'];
+const SKILLS: CognitiveSkill[] = ['math', 'memory', 'logic', 'speed', 'language', 'attention'];
 const CENTER = 100;
 const RADIUS = 80;
 const LABEL_RADIUS = 95;

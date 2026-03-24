@@ -1,9 +1,9 @@
 export type CognitiveSkill =
-  | 'calcul'
-  | 'memoire'
-  | 'logique'
-  | 'vitesse'
-  | 'langage'
+  | 'math'
+  | 'memory'
+  | 'logic'
+  | 'speed'
+  | 'language'
   | 'attention'
   | 'culture';
 
@@ -17,7 +17,7 @@ export interface GameConfig {
   description: string;
   icon: string;
   skills: CognitiveSkill[];
-  defaultDuration: number; // secondes
+  defaultDuration: number; // seconds
   maxLevel: DifficultyLevel;
   color: string;
 }

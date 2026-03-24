@@ -24,9 +24,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BrainTrain — Entraîne ton cerveau",
+  title: "BrainTrain — Train Your Brain",
   description:
-    "Mini-jeux pour entraîner ton cerveau : calcul mental, mémoire, logique, culture générale et plus encore.",
+    "Mini-games to train your brain: mental math, memory, logic, general knowledge and more.",
 };
 
 export const viewport: Viewport = {

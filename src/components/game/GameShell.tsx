@@ -66,7 +66,7 @@ export function GameShell({ config, difficulty: initialDifficulty = 1, onChainFi
         totalAnswers={state.totalAnswers}
         bestStreak={state.bestStreak}
         onReplay={game.startGame}
-        onQuit={() => router.push('/jeux')}
+        onQuit={() => router.push('/games')}
       />
     );
   }
@@ -84,9 +84,9 @@ export function GameShell({ config, difficulty: initialDifficulty = 1, onChainFi
       {/* Game HUD */}
       <div className="flex items-center justify-between px-4 py-2 glass border-b border-border/40">
         <button
-          onClick={() => router.push('/jeux')}
+          onClick={() => router.push('/games')}
           className="text-muted hover:text-foreground transition-colors touch-manipulation cursor-pointer p-1"
-          aria-label="Retour"
+          aria-label="Back"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 12H5M12 19l-7-7 7-7" />

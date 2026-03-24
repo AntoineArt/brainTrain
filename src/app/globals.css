@@ -20,11 +20,11 @@
   --muted: #76757e;
   --border: #2c2c33;
 
-  --skill-calcul: #4da6ff;
-  --skill-memoire: #b56cf0;
-  --skill-logique: #3ecf8e;
-  --skill-vitesse: #ff6b35;
-  --skill-langage: #ff6eb4;
+  --skill-math: #4da6ff;
+  --skill-memory: #b56cf0;
+  --skill-logic: #3ecf8e;
+  --skill-speed: #ff6b35;
+  --skill-language: #ff6eb4;
   --skill-attention: #00c2a8;
   --skill-culture: #ffb224;
 
@@ -56,11 +56,11 @@
   --muted: #8a8480;
   --border: #ddd6cb;
 
-  --skill-calcul: #2b7fd4;
-  --skill-memoire: #8f4ec7;
-  --skill-logique: #1f9960;
-  --skill-vitesse: #d4542a;
-  --skill-langage: #d44a8a;
+  --skill-math: #2b7fd4;
+  --skill-memory: #8f4ec7;
+  --skill-logic: #1f9960;
+  --skill-speed: #d4542a;
+  --skill-language: #d44a8a;
   --skill-attention: #0a8f7f;
   --skill-culture: #c88a00;
 
@@ -88,11 +88,11 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
 
-  --color-skill-calcul: var(--skill-calcul);
-  --color-skill-memoire: var(--skill-memoire);
-  --color-skill-logique: var(--skill-logique);
-  --color-skill-vitesse: var(--skill-vitesse);
-  --color-skill-langage: var(--skill-langage);
+  --color-skill-math: var(--skill-math);
+  --color-skill-memory: var(--skill-memory);
+  --color-skill-logic: var(--skill-logic);
+  --color-skill-speed: var(--skill-speed);
+  --color-skill-language: var(--skill-language);
   --color-skill-attention: var(--skill-attention);
   --color-skill-culture: var(--skill-culture);
 

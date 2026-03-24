@@ -19,7 +19,7 @@ export function Header({ title = 'BrainTrain', showBack = false }: HeaderProps) 
           <button
             onClick={() => router.back()}
             className="text-muted hover:text-foreground transition-colors touch-manipulation cursor-pointer"
-            aria-label="Retour"
+            aria-label="Back"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M19 12H5M12 19l-7-7 7-7" />

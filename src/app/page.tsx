@@ -23,8 +23,8 @@ export default function HomePage() {
   }, []);
 
   const defaultSkills = {
-    calcul: 0, memoire: 0, logique: 0,
-    vitesse: 0, langage: 0, attention: 0,
+    math: 0, memory: 0, logic: 0,
+    speed: 0, language: 0, attention: 0,
     culture: 0,
   };
 
@@ -40,7 +40,7 @@ export default function HomePage() {
 
         {/* Quick start cards */}
         <div className="grid grid-cols-2 gap-3 animate-fade-in-up stagger-1">
-          <Link href="/jeux" className="block">
+          <Link href="/games" className="block">
             <Card hoverable className="bg-primary/10 border-primary/20 h-full">
               <div className="flex flex-col gap-1.5">
                 <span className="text-2xl">🎮</span>
@@ -49,7 +49,7 @@ export default function HomePage() {
               </div>
             </Card>
           </Link>
-          <Link href="/jeux/enchainement" className="block">
+          <Link href="/games/chain" className="block">
             <Card hoverable className="bg-secondary/10 border-secondary/20 h-full">
               <div className="flex flex-col gap-1.5">
                 <span className="text-2xl">🔀</span>
@@ -71,7 +71,7 @@ export default function HomePage() {
           <h3 className="font-bold text-sm mb-2 tracking-tight">Jeux populaires</h3>
           <div className="flex gap-2.5 overflow-x-auto pb-1 -mx-4 px-4">
             {GAME_REGISTRY.slice(0, 5).map((game) => (
-              <Link key={game.id} href={`/jeux/${game.id}`} className="shrink-0">
+              <Link key={game.id} href={`/games/${game.id}`} className="shrink-0">
                 <Card hoverable className="w-24 p-3">
                   <div className="flex flex-col items-center text-center gap-1">
                     <span className="text-2xl">{game.icon}</span>
