@@ -4,6 +4,7 @@ import { useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import type { Id } from '../../../convex/_generated/dataModel';
 import { useTranslation } from '@/hooks/useTranslation';
+import type { TranslationKey } from '@/locales';
 import { GAME_MAP, GAME_I18N } from '@/games/registry';
 import { PlayerList } from './PlayerList';
 import { GameSelector } from './GameSelector';
@@ -136,7 +137,7 @@ export function LobbyScreen({
                 {GAME_I18N[selectedGame.id] ? t(GAME_I18N[selectedGame.id].name) : selectedGame.name}
               </p>
               <p className="text-xs text-muted">
-                {t('difficulty.label')}: {t(`difficulty.${difficulty}` as `difficulty.${number}`)}
+                {t('difficulty.label')}: {t(`difficulty.${difficulty}` as TranslationKey)}
               </p>
             </div>
           </div>

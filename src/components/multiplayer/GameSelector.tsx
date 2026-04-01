@@ -3,6 +3,7 @@
 import { GAME_REGISTRY, GAME_I18N } from '@/games/registry';
 import { useTranslation } from '@/hooks/useTranslation';
 import type { DifficultyLevel } from '@/types';
+import type { TranslationKey } from '@/locales';
 
 interface GameSelectorProps {
   selectedGameId: string | null;
@@ -73,7 +74,7 @@ export function GameSelector({
                   : 'bg-surface/50 text-muted hover:text-foreground border border-border/20'}
               `}
             >
-              {t(`difficulty.${level}` as `difficulty.${number}`)}
+              {t(`difficulty.${level}` as TranslationKey)}
             </button>
           ))}
         </div>
