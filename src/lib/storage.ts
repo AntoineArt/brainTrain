@@ -4,6 +4,8 @@ const STORAGE_KEYS = {
   GAME_HISTORY: 'bt_game_history',
   SETTINGS: 'bt_settings',
   SCHEMA_VERSION: 'bt_schema_version',
+  MULTIPLAYER_ID: 'bt_mp_id',
+  MULTIPLAYER_NAME: 'bt_mp_name',
 } as const;
 
 export { STORAGE_KEYS };

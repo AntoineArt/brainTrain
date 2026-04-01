@@ -11,10 +11,15 @@ export function BottomNav() {
   const NAV_ITEMS = [
     { href: '/', label: t('nav.home'), icon: '🏠' },
     { href: '/games', label: t('nav.games'), icon: '🎮' },
+    { href: '/multiplayer', label: t('nav.multiplayer'), icon: '👥' },
     { href: '/results', label: t('nav.stats'), icon: '📊' },
   ];
 
-  if (pathname.startsWith('/games/') && pathname !== '/games') {
+  // Hide nav during active game sessions
+  if (
+    (pathname.startsWith('/games/') && pathname !== '/games') ||
+    pathname.startsWith('/multiplayer/play/')
+  ) {
     return null;
   }
 
