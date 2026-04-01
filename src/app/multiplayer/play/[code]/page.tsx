@@ -4,7 +4,7 @@ import { use } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from 'convex/react';
 import dynamic from 'next/dynamic';
-import { api } from '../../../../../convex/_generated/api';
+import { api } from '@convex/_generated/api';
 import { getItem } from '@/lib/storage';
 import { useTranslation } from '@/hooks/useTranslation';
 import { MultiplayerGameShell } from '@/components/multiplayer/MultiplayerGameShell';

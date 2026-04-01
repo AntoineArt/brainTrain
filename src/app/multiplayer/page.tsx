@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
+import { api } from '@convex/_generated/api';
 import { useTranslation } from '@/hooks/useTranslation';
 import { getItem, setItem } from '@/lib/storage';
 import { NameEntry } from '@/components/multiplayer/NameEntry';

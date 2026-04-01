@@ -3,8 +3,8 @@
 import { useEffect, useCallback, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
-import type { Id } from '../../../convex/_generated/dataModel';
+import { api } from '@convex/_generated/api';
+import type { Id } from '@convex/_generated/dataModel';
 import type { DifficultyLevel } from '@/types';
 import { useMultiplayerGame } from '@/hooks/useMultiplayerGame';
 import { useTranslation } from '@/hooks/useTranslation';

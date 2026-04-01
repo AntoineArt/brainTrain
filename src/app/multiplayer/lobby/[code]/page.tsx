@@ -3,7 +3,7 @@
 import { use, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from 'convex/react';
-import { api } from '../../../../../convex/_generated/api';
+import { api } from '@convex/_generated/api';
 import { getItem } from '@/lib/storage';
 import { useTranslation } from '@/hooks/useTranslation';
 import { LobbyScreen } from '@/components/multiplayer/LobbyScreen';
